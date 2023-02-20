@@ -4,7 +4,7 @@ simple ToDo App in Techstarter Course
 https://taiga.techrunner.de/project/aws-22-10-gruppe-1
 
 
-2/16/2023 : an
+2023-02-16 : an
 
  frontend :
     (mkdir src)
@@ -28,6 +28,7 @@ warning: in the working copy of 'frontend/package-lock.json', LF will be replace
 warning: in the working copy of 'frontend/package.json', LF will be replaced by CRLF the next time Git touches it
 
 
+2023-02-20 : FurYa
 
 Database:
     Postgres
