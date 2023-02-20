@@ -26,3 +26,20 @@ backend :
 warning: in the working copy of 'backend/package.json', LF will be replaced by CRLF the next time Git touches it
 warning: in the working copy of 'frontend/package-lock.json', LF will be replaced by CRLF the next time Git touches it
 warning: in the working copy of 'frontend/package.json', LF will be replaced by CRLF the next time Git touches it
+
+
+
+Database:
+    Postgres
+
+    name: simpletodo
+
+
+Table:
+
+    -todos
+        -id -> serial,  notNull, PK
+        -title -> character, lenght: 255
+        -task -> task, text
+        -due_date -> timestamp .. zone
+        -prio -> integer
