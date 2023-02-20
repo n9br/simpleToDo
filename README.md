@@ -5,19 +5,19 @@ https://taiga.techrunner.de/project/aws-22-10-gruppe-1
 
 
 2/16/2023 : an
- backend :
 
  frontend :
-    mkdir src
+    (mkdir src)
     npm install --save-dev parcel
     npm install cors
-    npx parcel src/index.html 
+    (npx parcel src/index.html) 
     edit package.json : add start script for src/index.html
     > npm start        // start command for parcel server frontend
 
 backend :
     npm init
     npm install nodejs
+    npm install pg
     create index.js (Test)
     > node .\index.js   // should output 'hello from backend - index.js'
 
