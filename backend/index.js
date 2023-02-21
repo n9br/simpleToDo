@@ -18,7 +18,7 @@ const port = 4000;
 const pgClient = new Client({
   database: "simpletodo",
   user: "postgres", 
-  password: "ee49f2c1d69f42faa6f5c91dc1daa8d9"
+  password: "postgres"
 });
 
 console.log("DB-PAssword: " + pgClient.password)
