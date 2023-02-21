@@ -45,6 +45,9 @@ app.use(express.json());
  * 
  */
 
+/**
+ * id - title - description - due_date - priority;
+ */
 class ToDo {
     id;
     title;
@@ -61,6 +64,43 @@ class ToDo {
     }
   };
 
+  // Get ToDos
+  /**
+   * Query DB
+   * Return all ToDos
+   */
+  app.get('/todos', (req, res) => {
+  
+  })
+
+    // Post ToDos
+    /**
+     * Check if Title and Description in JSON
+     * ? Error ?
+     * Insert into DB
+     * Return Record
+     */
+app.post('/todos', (request, response) => {
+
+  // var { title, description, due_date, priority } = request.body;
+  // console.log (
+  //   // " id: " + id +
+  //   " title: " + title +
+  //   " description: " + description +
+  //   " due_date: " + due_date +
+  //   " priority: " + priority
+  //   // " typeof: " + typeof
+  // )
+  const toDo = new ToDo(request.body); 
+    console.log (
+    // " id: " + id +
+    " title: " + toDo.title +
+    " description: " + toDo.description +
+    " due_date: " + toDo.due_date +
+    " priority: " + toDo.priority +
+    " typeof: " + typeof(toDo)
+  )
+})
 
 
 
