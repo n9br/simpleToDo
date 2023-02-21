@@ -7,9 +7,121 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script> -->
-</head>
-<body>
-    <h1>hello from simple Todo App!!</h1>
+
     
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.22/dist/css/uikit.min.css" />
+
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <style>
+        .td-center {
+            text-align: center;
+        }
+        .td-container-center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>    
+</head>
+
+<body>
+    
+    <header>
+        <div class="uk-container">
+            <h1 class="td-center">ToDo</h1>
+            <div class="uk-container td-container-center" id="td-card-container">
+        </div>
+
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-left uk-container">
+                <ul class="uk-navbar-nav">
+                    <li uk-toggle="target: #create-ToDo-modal"  class="uk-active"><a href="#">Add Task</a></li>
+                </ul>           
+                <!-- <ul class="uk-navbar-nav">
+                    <li uk-toggle="target: #td-login-modal"  class="uk-active"><a href="#">Login</a></li>
+                </ul> -->
+            </div>
+        </nav>
+    </header>
+    
+    
+    </div>
+
+        <div uk-modal id="create-ToDo-modal">
+            <div class="uk-modal-dialog uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <div class="uk-modal-header">
+                    <h2 class="uk-modal-title">Create New ToDo</h2>
+                </div>
+
+                <div class="uk-modal-body">
+                    <div class="uk-margin">
+                        <div class="uk-form-label">Title</div>
+                        <input class="uk-input" id="td-title" name="user" placeholder="User"/>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-form-label">Description</div>
+                        <textarea 
+                                class="uk-textarea" 
+                                rows="5" 
+                                placeholder="your todo here ..." 
+                                id="td-todotext"
+                                name="text"
+                                aria-label="Textarea"></textarea>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-form-label">Due_Date</div>
+                        <input class="uk-input" id="td-due_date" name="due_date" placeholder="Due_Date"/>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-form-label">Priority</div>
+                        <input class="uk-input" id="td-Priority" name="priority" placeholder="Priority"/>
+                    </div>
+
+                </div>
+                <div class="uk-modal-footer">
+                    <div style="display: flex; justify-content: space-around;">
+                        <button type="reset" class="uk-button">Reset</button>
+                        <button class="uk-button uk-button-primary" onclick="saveTask()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div uk-modal id="td-login-modal">
+            <div class="uk-modal-dialog uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <div class="uk-modal-header">
+                    <h2 class="uk-modal-title">Login to ToDo</h2>
+                </div>
+
+                <div class="uk-modal-body">
+                    <div class="uk-margin">
+                        <div class="uk-form-label">Username</div>
+                        <input class="uk-input" id="login-username" name="Username" placeholder="Username" />
+                        <div class="uk-form-label">Password</div>
+                        <input class="uk-input" type="password" id="login-password" name="Password" placeholder="Password" />
+                    </div>
+                </div>
+                <div class="uk-modal-footer">
+                    <div style="display: flex; justify-content: space-around;">
+                        <button type="reset" class="uk-button">Reset</button>
+                        <button class="uk-button uk-button-primary" onclick="submitUserlogin()">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
 </body>
+
+
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.15.22/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.15.22/dist/js/uikit-icons.min.js"></script>
+
+<!-- <script src='main.js'></script> -->
+<script src="todo.js"></script>
 </html>
