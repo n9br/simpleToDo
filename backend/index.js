@@ -11,6 +11,7 @@ const { Client } = require('pg');
 
 const express = require("express");     
 const { request } = require("http");
+const { title } = require("process");
 
 const app = express();
 const port = 4000;
@@ -100,6 +101,10 @@ app.post('/todos', (request, response) => {
     " priority: " + toDo.priority +
     " typeof: " + typeof(toDo)
   )
+  if (! toDo.title || ! toDo.description) {
+    console.log("title or description from form missing")
+    response.status(401).send("Please enter title and description!");
+  }
 })
 
 
