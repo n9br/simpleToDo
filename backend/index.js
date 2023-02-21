@@ -48,16 +48,16 @@ app.use(express.json());
 class ToDo {
     id;
     title;
-    task;
+    description;
     due_date;
-    prio;
+    priority;
   
     constructor(data) {
       this.id = data.id;
       this.title = data.title;  
-      this.task = data.task;
+      this.description = data.description;
       this.due_date = data.due_date;
-      this.prio = data.prio;
+      this.priority = data.priority;
     }
   };
 

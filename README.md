@@ -41,6 +41,6 @@ Table:
     -todos
         -id -> serial,  notNull, PK
         -title -> character, lenght: 255
-        -task -> task, text
+        -description -> text
         -due_date -> timestamp .. zone
-        -prio -> integer
+        -priority -> integer
