@@ -40,4 +40,4 @@ Table:
         -title -> character, lenght: 255
         -description -> text
         -due_date -> timestamp .. zone
-        -priority -> integer
+        -priority -> char 255

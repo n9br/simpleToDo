@@ -107,12 +107,11 @@ app.post('/todos', (request, response) => {
   }
 
   // const queryString = ("INSERT INTO todos (title, description, due_date, priority) VALUES $1, $2, $3, $4 RETURNING *;");
-  const queryString = "INSERT INTO todos (title, description) VALUES ($1, $2) RETURNING *;";
-  const res = pgClient.query(queryString, [toDo.title, toDo.description], (err,res) => {
+  const queryString = "INSERT INTO todos (title, description, due_date, priority) VALUES ($1, $2, $3, $4) RETURNING *;";
+  const res = pgClient.query(queryString, [toDo.title, toDo.description, toDo.due_date, toDo.priority], (err,res) => {
     if (err) { console.log(err.stack) } 
 		else { 
-      console.log(res.rows[0]) 
-      console.log(res);
+      console.log(res.rows[0]); 
     }
   });
 })
