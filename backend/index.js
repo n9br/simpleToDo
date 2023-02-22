@@ -1,5 +1,4 @@
 
-console.log("hello from backend - index.js");
 
 /**
  * Const.
@@ -22,13 +21,12 @@ const pgClient = new Client({
   password: "postgres"
 });
 
-console.log("DB-PAssword: " + pgClient.password)
+// console.log("DB-PAssword: " + pgClient.password)
 
 if ( pgClient.connect()) {
-    // console.log(pgClient);
-    console.log("DB Host: " + pgClient.host + ":" + pgClient.port);
-    console.log("Database: " + pgClient.database )
-    console.log("Connection successful")
+    // console.log("DB Host: " + pgClient.host + ":" + pgClient.port);
+    // console.log("Database: " + pgClient.database )
+    // console.log("Connection successful")
 } ;
 
 /**
@@ -65,49 +63,23 @@ class ToDo {
     }
   };
 
-  // Get ToDos
-  /**
-   * Query DB
-   * Return all ToDos
-   */
-
   function getTodosFromDB (req, response) {
     pgClient.query("SELECT * FROM todos ORDER BY due_date DESC",  (err, result) => {
       // console.log(result);
       response.send(result.rows);
     })
-    // return(result.rows);
   }
 
-  app.get('/todos', getTodosFromDB)
-
-    // Post ToDos
-    /**
-     * Check if Title and Description in JSON
-     * ? Error ?
-     * Insert into DB
-     * Return Record
-     */
-app.post('/todos', (request, response) => {
-
-  // var { title, description, due_date, priority } = request.body;
-  // console.log (
+  function postTodoToDB (req, response) {
+    const toDo = new ToDo(req.body); 
+  //   console.log (
   //   // " id: " + id +
-  //   " title: " + title +
-  //   " description: " + description +
-  //   " due_date: " + due_date +
-  //   " priority: " + priority
-  //   // " typeof: " + typeof
+  //   " title: " + toDo.title +
+  //   " description: " + toDo.description +
+  //   " due_date: " + toDo.due_date +
+  //   " priority: " + toDo.priority +
+  //   " typeof: " + typeof(toDo)
   // )
-  const toDo = new ToDo(request.body); 
-    console.log (
-    // " id: " + id +
-    " title: " + toDo.title +
-    " description: " + toDo.description +
-    " due_date: " + toDo.due_date +
-    " priority: " + toDo.priority +
-    " typeof: " + typeof(toDo)
-  )
   if (! toDo.title || ! toDo.description) {
     console.log("title or description from form missing")
     response.status(401).send("Please enter title and description!");
@@ -120,11 +92,16 @@ app.post('/todos', (request, response) => {
       console.log(res.rows[0]);  
        } 
   });
-})
+  }
+
+// Get Todos
+app.get('/todos', getTodosFromDB)
+
+// Post Todos
+app.post('/todos', postTodoToDB)
 
 
-
-  // Hello World
+// Hello World
 app.get('/', (req, res) => {
     res.send('Hello World from simpleToDo expressJS!')
   })
