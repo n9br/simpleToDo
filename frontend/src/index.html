@@ -21,6 +21,16 @@
             margin-left: auto;
             margin-right: auto;
         }
+        label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+        }
+
+        input,
+        label {
+            margin: 0.4rem 0;
+            }
+
     </style>    
 </head>
 
@@ -70,16 +80,29 @@
                                 name="text"
                                 aria-label="Textarea"></textarea>
                     </div>
-                    <div class="uk-margin">
+                    <!-- <div class="uk-margin">
                         <div class="uk-form-label">Due_Date</div>
                         <input class="uk-input" id="td-due_date" name="due_date" placeholder="Due_Date"/>
+                    </div> -->
+                    <div>
+
+                        <label for="date">Due_Date:</label>
+
+                        <input type="date" id="td-DueDate" name="due_date">
+                                        
+                    </div>
+                    <div>
+
+                    <label for="Priority">Priority:</label>
+                    <select name="Prio" id="td-prio">
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                      
+                    </select>
                     </div>
 
-                    <div class="uk-margin">
-                        <div class="uk-form-label">Priority</div>
-                        <input class="uk-input" id="td-Priority" name="priority" placeholder="Priority"/>
-                    </div>
-
+                    
                 </div>
                 <div class="uk-modal-footer">
                     <div style="display: flex; justify-content: space-around;">

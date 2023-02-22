@@ -17,8 +17,8 @@ class ToDo {
 function saveTask() {
   const ToDoTitle = document.getElementById("td-title").value;
   const ToDoDes = document.getElementById("td-todotext").value;
-  const ToDo_Due_Date = document.getElementById("td-due_date").value;
-  const ToDo_Priority = document.getElementById("td-Priority").value;
+  const ToDo_Due_Date = document.getElementById("td-DueDate").value;
+  const ToDo_Priority = document.getElementById("td-prio").value;
 
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
 
