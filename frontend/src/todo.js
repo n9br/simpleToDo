@@ -14,6 +14,42 @@ class ToDo {
   }
 }
 
+
+function repeatcard(todo) {
+  return `
+    <div class="uk-card uk-card-default uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
+        <div class="uk-card-header">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-auto">
+                    <img class="uk-border-circle" width="40" height="40" src="https://i.pravatar.cc/40" alt="Avatar">
+                </div>
+                <div class="uk-width-expand">
+                    <h3 class="uk-card-title uk-margin-remove-bottom">${todo.title}</h3>
+                    <p class="uk-text-meta uk-margin-remove-top"><time>${todo.due_date}</time></p>
+                </div>
+            </div>
+        </div>
+        <div class="uk-card-body">
+            <p>${todo.description}</p>
+            <p>${todo.priority}</p>
+        </div>
+    </div>
+    `;
+}
+
+function displaytodos(todoss) {
+  document.getElementById("td-card-container").innerHTML = null
+
+  todoss
+      .map(todoss => repeatcard(todos))
+      .forEach(todos => document.getElementById("td-card-container").innerHTML += todos)
+}
+
+
+
+
+
+
 function saveTask() {
   const ToDoTitle = document.getElementById("td-title").value;
   const ToDoDes = document.getElementById("td-todotext").value;
@@ -24,6 +60,16 @@ function saveTask() {
 
   postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
 }
+
+function getTodosFromBackend(){    
+  fetch("http://localhost:4000/todos")
+      .then(res => res.json())
+      .then (json => {
+          const todos = json.map(todoz => new ToDo(todoz))
+          displaytodos(todos)})
+      .catch(error => console.log(error))
+                 
+      }
 
 function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
   var fetchConfig = {
@@ -37,19 +83,21 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
       due_date: ToDo_Due_Date,
       priority: ToDo_Priority,
     }),
-  };
+  }
 
   fetch("http://localhost:4000/todos", fetchConfig).then((res) => {
-    if (res.status === 201) {
-      // @ts-ignore
-      UIkit.notification({
-        message: "Task created!",
-        status: "success",
-        pos: "bottom-center",
-        timeout: 3_000,
-      });
-    }
-  });
-}
-// console.log(res)
-// }
+      if (res.status === 201) {
+        console.log(res.status)
+
+        UIkit.notification({
+          message: "New Task created!",
+          status: "success",
+          pos: "bottom-center",
+          timeout: 3_000,
+        });
+        
+      }
+    });
+  }
+
+  getTodosFromBackend()
