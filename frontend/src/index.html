@@ -31,27 +31,30 @@
             margin: 0.4rem 0;
             }
 
-    </style>    
+    </style>  
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left uk-container">
+            <ul class="uk-navbar-nav">
+                <li uk-toggle="target: #create-ToDo-modal"  class="uk-active"><a href="#">Add Task</a></li>
+            </ul>           
+            <!-- <ul class="uk-navbar-nav">
+                <li uk-toggle="target: #td-login-modal"  class="uk-active"><a href="#">Login</a></li>
+            </ul> -->
+        </div>
+    </nav>  
+    
 </head>
 
 <body>
     
     <header>
-        <div class="uk-container">
-            <h1 class="td-center">ToDo</h1>
-            <div class="uk-container td-container-center" id="td-card-container">
-        </div>
-
-        <nav class="uk-navbar-container" uk-navbar>
-            <div class="uk-navbar-left uk-container">
-                <ul class="uk-navbar-nav">
-                    <li uk-toggle="target: #create-ToDo-modal"  class="uk-active"><a href="#">Add Task</a></li>
-                </ul>           
-                <!-- <ul class="uk-navbar-nav">
-                    <li uk-toggle="target: #td-login-modal"  class="uk-active"><a href="#">Login</a></li>
-                </ul> -->
-            </div>
-        </nav>
+       
+        
+        <div class="uk-container"></div>
+    <h1 class="td-center">ToDo</h1>
+    <div class="uk-container td-container-center" id="td-card-container">
+</div>
+        
     </header>
     
     
