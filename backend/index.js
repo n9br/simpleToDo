@@ -70,9 +70,16 @@ class ToDo {
    * Query DB
    * Return all ToDos
    */
-  app.get('/todos', (req, res) => {
-  
-  })
+
+  function getTodosFromDB (req, response) {
+    pgClient.query("SELECT * FROM todos ORDER BY due_date DESC",  (err, result) => {
+      // console.log(result);
+      response.send(result.rows);
+    })
+    // return(result.rows);
+  }
+
+  app.get('/todos', getTodosFromDB)
 
     // Post ToDos
     /**
