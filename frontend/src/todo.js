@@ -16,15 +16,25 @@ class ToDo {
 
 
 function repeatcard(todo) {
+
+  // let longDate = new Date(todo.due_date).toLocaleDateString('en-us', { dateStyle: "medium", timeStyle: "short", timeZone: "", weekday:"short", month:"short", day:"numeric"});
+  // let longDate = new Date(todo.due_date);
+  // let longDate = new Date(todo.due_date).toLocaleDateString('en-us');
+  let longDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short" });
+
   return `
     <div class="uk-card uk-card-default uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
         <div class="uk-card-header">
-            <div class="uk-grid-small uk-flex-middle" uk-grid>
+            <div class="uk-grid-small uk-flex-middle" uk-grid style="display: flex; justify-content: space-between;">
                 
-                <div class="uk-width-expand">
-                    <h3 class="uk-card-title uk-margin-remove-bottom">${todo.title}</h3>
-                    
+                <div class="uk-width-expand" >
+                    <h4 class="uk-card-title uk-margin-remove-bottom">${todo.title}</h4>
                 </div>
+
+                <div class="uk-width-expand" >
+                <p class="uk-card-title uk-margin-remove-bottom td-date">${longDate}</p>
+                </div>
+
             </div>
         </div>
         <div class="uk-card-body">
