@@ -16,6 +16,13 @@ class ToDo {
 
 
 function repeatcard(todo) {
+  let returnString = "";
+  let today = new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
+  let due_date = new Date(todo.due_date);
+  due_date.toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
+  console.log("Today: " + today + " - due_date: " + due_date );
+
+
   return `
     <div class="uk-card uk-card-default uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
         <div class="uk-card-header">
