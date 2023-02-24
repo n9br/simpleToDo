@@ -18,29 +18,40 @@ class ToDo {
 function repeatcard(todo) {
   let returnString = "";
   let today = new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
-  let due_date = new Date(todo.due_date);
-  due_date.toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
-  console.log("Today: " + today + " - due_date: " + due_date );
+  let due_date = new Date(todo.due_date).toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
 
+  returnString = `
+      <div class="uk-card uk-card-default uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
+          <div class="uk-card-header">
+              <div class="uk-grid-small uk-flex-middle" uk-grid>
+                  
+                  <div class="uk-width-expand">
+  `
 
-  return `
-    <div class="uk-card uk-card-default uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
-        <div class="uk-card-header">
-            <div class="uk-grid-small uk-flex-middle" uk-grid>
-                
-                <div class="uk-width-expand">
-                    <h3 class="uk-card-title uk-margin-remove-bottom">${todo.title}</h3>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="uk-card-body">
-        <p class="uk-text-meta uk-margin-remove-top"><time>Due_date: ${todo.due_date}</time></p>
-            <p>Description:${todo.description}</p>
-            <p> Priority: ${todo.priority}</p>
-        </div>
+  if (due_date === today) {
+    returnString += `
+        <h3 class="uk-card-title uk-margin-remove-bottom td-today">${todo.title}</h3>
+    `
+  }
+  else {
+    returnString += `
+    <h3 class="uk-card-title uk-margin-remove-bottom">${todo.title}</h3>
+`
+  }
+
+  returnString += `
+      </div>
     </div>
-    `;
+  </div>
+    <div class="uk-card-body">
+        <p class="uk-text-meta uk-margin-remove-top"><time>Due_date: ${todo.due_date}</time></p>
+          <p>Description:${todo.description}</p>
+          <p> Priority: ${todo.priority}</p>
+    </div>
+  </div>
+  `
+
+  return returnString;
 }
 
 function displaytodos(todo) {
