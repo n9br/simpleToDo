@@ -20,7 +20,7 @@ function repeatcard(todo) {
   // let longDate = new Date(todo.due_date).toLocaleDateString('en-us', { dateStyle: "medium", timeStyle: "short", timeZone: "", weekday:"short", month:"short", day:"numeric"});
   // let longDate = new Date(todo.due_date);
   // let longDate = new Date(todo.due_date).toLocaleDateString('en-us');
-  let longDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short" });
+  let longDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short", month:"numeric", day:"numeric" });
 
   return `
     <div class="uk-card uk-card-default uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
