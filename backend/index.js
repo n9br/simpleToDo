@@ -70,6 +70,22 @@ class ToDo {
     })
   }
 
+
+// ###################################################
+
+
+  function deleteTodos (request, response){
+    var { id } = request.body;
+    const queryString = "DELETE FROM todos WHERE id = $1;";
+    const res = pgClient.query(queryString, [id], (err, result) => {
+      response.send(result.rows);
+      // console.log(result)
+    })
+  }
+// ###################################################
+
+
+
   function postTodoToDB (req, response) {
     const toDo = new ToDo(req.body); 
   //   console.log (
@@ -100,6 +116,8 @@ app.get('/todos', getTodosFromDB)
 // Post Todos
 app.post('/todos', postTodoToDB)
 
+// Delete Post
+app.delete('/todos', deleteTodos)
 
 // Hello World
 app.get('/', (req, res) => {
@@ -114,3 +132,4 @@ app.get('/', (req, res) => {
   app.listen(port, () => {          // actually run server (listen on port)
     console.log(`simpleToDo Server listening on port ${port}`)
   })
+

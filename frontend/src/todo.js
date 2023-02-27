@@ -31,6 +31,7 @@ function repeatcard(todo) {
         <p class="uk-text-meta uk-margin-remove-top"><time>Due_date: ${todo.due_date}</time></p>
             <p>Description:${todo.description}</p>
             <p> Priority: ${todo.priority}</p>
+            <a href="" onclick="deleteTodo(${todo.id})"   uk-icon="icon: trash"></a>
         </div>
     </div>
     `;
@@ -43,6 +44,8 @@ function displaytodos(todo) {
       .map(todoz => repeatcard(todoz))
       .forEach(todoz => document.getElementById("td-card-container").innerHTML += todoz)
 }
+
+
 
 
 function saveTask() {
@@ -94,5 +97,37 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
       }
     });
   }
+
+
+// #####################################
+
+  function deleteTodo(ToDoId) {
+    var fetchConfig = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: ToDoId
+      }),
+    }
+  
+    fetch("http://localhost:4000/todos", fetchConfig).then((res) => {
+        if (res.status === 201) {
+          console.log(res.status)
+  
+          UIkit.notification({
+            message: "Task Delete!",
+            status: "success",
+            pos: "bottom-center",
+            timeout: 3_000,
+          });
+          
+        }
+      });
+    }
+
+// #####################################
+
 
   getTodosFromBackend()
