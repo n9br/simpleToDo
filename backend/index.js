@@ -45,13 +45,14 @@ app.use(express.json());
  */
 
 /**
- * id - title - description - due_date - priority;
+ * id - title - description - due_date - time - priority;
  */
 class ToDo {
     id;
     title;
     description;
     due_date;
+    time;
     priority;
   
     constructor(data) {
@@ -59,7 +60,9 @@ class ToDo {
       this.title = data.title;  
       this.description = data.description;
       this.due_date = data.due_date;
+      this.time = data.time;
       this.priority = data.priority;
+      
     }
   };
 
@@ -77,6 +80,7 @@ class ToDo {
   //   " title: " + toDo.title +
   //   " description: " + toDo.description +
   //   " due_date: " + toDo.due_date +
+  //   " time: " + toDo.time +
   //   " priority: " + toDo.priority +
   //   " typeof: " + typeof(toDo)
   // )
@@ -84,15 +88,73 @@ class ToDo {
     console.log("title or description from form missing")
     response.status(401).send("Please enter title and description!");
   }
-
-  const queryString = "INSERT INTO todos (title, description, due_date, priority) VALUES ($1, $2, $3, $4) RETURNING *;";
-  const res = pgClient.query(queryString, [toDo.title, toDo.description, toDo.due_date, toDo.priority], (err,res) => {
+  const queryString = "INSERT INTO todos (title, description, due_date, time, priority) VALUES ($1, $2, $3, $4, $5) RETURNING *;";
+  const res = pgClient.query(queryString, [toDo.title, toDo.description, toDo.due_date, toDo.time, toDo.priority], (err,res) => {
     if (res.rows[0].id) { 
       response.status(201).send("Todo created!");
-      console.log(res.rows[0]);  
+      console.log(res.rows[0]);
        } 
   });
   }
+
+
+  function UpdateTodoToDB(request, response){
+    const id = request.params.id
+    const {title } = request.body
+    
+    const toDo = new ToDo(request.body)
+    console.log(toDo)
+    console.log("print1"+id)
+    
+    pgClient.query(
+      "UPDATE todos SET title = $1  WHERE id = 30",(err,res) => {
+        console.log(err,res)
+      })
+    }
+        //response.status(200).send(`User modified with ID: ${id}`)
+      
+    
+  
+
+  // function UpdateTodoToDB (req, response) {
+  //   const toDo = new ToDo(req.body); 
+  //   const id=req.body.id;
+    
+  //  //  console.log (
+  //  //    " id: " + id +
+  //  //  " title: " + toDo.title +
+  //  //  " description: " + toDo.description +
+  //  //  " due_date: " + toDo.due_date +
+  //  //  " time: " + toDo.time +
+  //  //  " priority: " + toDo.priority +
+  //  //  " typeof: " + typeof(toDo)
+  //  //)
+  // if (! toDo.title || ! toDo.description) {
+  //   console.log("title or description from form missing")
+  //   response.status(401).send("Please enter title and description!");
+  // }
+  
+  // const queryString = 'update todos set (title) = ($1), (description)= ($2), (due_date)=($3), (time)=($4), (priority)=($5) where (id)=id';
+  // console.log(queryString)
+  // pgClient.query(queryString, toDo.id, (err, res) => {
+  //   if (err) {
+  //         console.log(err)
+  //         process.exit() 
+      
+  //      } 
+  //      response.status(201).send("Task Updated!");
+  //      console.log(res.rows[0]);
+  // });
+  // }
+
+
+
+
+  
+app.put('/todos/:id',UpdateTodoToDB)
+
+
+
 
 // Get Todos
 app.get('/todos', getTodosFromDB)
