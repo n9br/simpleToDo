@@ -3,42 +3,44 @@ class ToDo {
   title;
   description;
   due_date;
+  time;
   priority;
+ 
 
   constructor(data) {
     this.id = data.id;
     this.title = data.title;
     this.description = data.description;
     this.due_date = data.due_date;
-    this.priority = data.priority;
-  }
+    this.time = data.time;    
+    this.priority = data.priority;   
+  } 
 }
-
 
 function repeatcard(todo) {
   return `
-    <div class="uk-card uk-card-default uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
-        <div class="uk-card-header">
-            <div class="uk-grid-small uk-flex-middle" uk-grid>
-                
-                <div class="uk-width-expand">
-                    <h3 class="uk-card-title uk-margin-remove-bottom">${todo.title}</h3>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="uk-card-body">
-        <p class="uk-text-meta uk-margin-remove-top"><time>Due_date: ${todo.due_date}</time></p>
-            <p>Description:${todo.description}</p>
-            <p> Priority: ${todo.priority}</p>
-        </div>
+  <div class="uk-card uk-card-default" uk-width-2-2@m td-container-center" style="margin-bottom: 30px;">
+    <div class="uk-card-header">
+      <div class="uk-grid-small uk-flex-middle" uk-grid>            
+          <div class="uk-width-expand">
+                    <h3 class="uk-card-title uk-margin-remove-bottom">${todo.title}                      
+                    <a href="#" uk-toggle="target: #Edit-ToDo-modal" class="uk-icon-link"uk-icon="pencil"></a></h3>
+                    <p hidden>${todo.id}</h2>                    
+          </div>
+      </div>
     </div>
+      <div class="uk-card-body">
+                  <p>Due_date: ${todo.due_date}</p>
+                  <p>Time :${todo.time}</p>
+                  <p>Description:${todo.description}</p>
+                  <p> Priority: ${todo.priority}</p>
+      </div>
+  </div>
     `;
 }
 
 function displaytodos(todo) {
   document.getElementById("td-card-container").innerHTML = null
-
   todo
       .map(todoz => repeatcard(todoz))
       .forEach(todoz => document.getElementById("td-card-container").innerHTML += todoz)
@@ -46,14 +48,18 @@ function displaytodos(todo) {
 
 
 function saveTask() {
-  const ToDoTitle = document.getElementById("td-title").value;
+  const ToDoTitle = document.getElementById("td-title").value;  
   const ToDoDes = document.getElementById("td-todotext").value;
   const ToDo_Due_Date = document.getElementById("td-DueDate").value;
+  const ToDo_time = document.getElementById("td_time").value;
   const ToDo_Priority = document.getElementById("td-prio").value;
+  
 
-  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
+  
 
-  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
+  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date,ToDo_time, ToDo_Priority);
+
+  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date,ToDo_time, ToDo_Priority);
 }
 
 function getTodosFromBackend(){    
@@ -66,7 +72,7 @@ function getTodosFromBackend(){
                  
       }
 
-function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
+function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date,ToDo_time, ToDo_Priority) {
   var fetchConfig = {
     method: "POST",
     headers: {
@@ -76,6 +82,7 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
       title: ToDoTitle,
       description: ToDoDes,
       due_date: ToDo_Due_Date,
+      time : ToDo_time,
       priority: ToDo_Priority,
     }),
   }
