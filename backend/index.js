@@ -45,13 +45,14 @@ app.use(express.json());
  */
 
 /**
- * id - title - description - due_date - priority;
+ * id - title - description - due_date - time - priority;
  */
 class ToDo {
     id;
     title;
     description;
     due_date;
+    time;
     priority;
   
     constructor(data) {
@@ -59,7 +60,9 @@ class ToDo {
       this.title = data.title;  
       this.description = data.description;
       this.due_date = data.due_date;
+      this.time = data.time;
       this.priority = data.priority;
+      
     }
   };
 
@@ -77,6 +80,7 @@ class ToDo {
   //   " title: " + toDo.title +
   //   " description: " + toDo.description +
   //   " due_date: " + toDo.due_date +
+  //   " time: " + toDo.time +
   //   " priority: " + toDo.priority +
   //   " typeof: " + typeof(toDo)
   // )
@@ -85,14 +89,15 @@ class ToDo {
     response.status(401).send("Please enter title and description!");
   }
 
-  const queryString = "INSERT INTO todos (title, description, due_date, priority) VALUES ($1, $2, $3, $4) RETURNING *;";
-  const res = pgClient.query(queryString, [toDo.title, toDo.description, toDo.due_date, toDo.priority], (err,res) => {
+  const queryString = "INSERT INTO todos (title, description, due_date, time, priority) VALUES ($1, $2, $3, $4, $5) RETURNING *;";
+  const res = pgClient.query(queryString, [toDo.title, toDo.description, toDo.due_date, toDo.time, toDo.priority], (err,res) => {
     if (res.rows[0].id) { 
       response.status(201).send("Todo created!");
-      console.log(res.rows[0]);  
+      console.log(res.rows[0]);
        } 
   });
   }
+  
 
 // Get Todos
 app.get('/todos', getTodosFromDB)
