@@ -31,7 +31,7 @@ function repeatcard(todo) {
         <p class="uk-text-meta uk-margin-remove-top"><time>Due_date: ${todo.due_date}</time></p>
             <p>Description:${todo.description}</p>
             <p> Priority: ${todo.priority}</p>
-            <a href="" onclick="deleteTodo(${todo.id})"   uk-icon="icon: trash"></a>
+            <span onclick="deleteTodo(${todo.id})" style="cursor: pointer;"  uk-icon="icon: trash"></span>
         </div>
     </div>
     `;
@@ -41,8 +41,8 @@ function displaytodos(todo) {
   document.getElementById("td-card-container").innerHTML = null
 
   todo
-      .map(todoz => repeatcard(todoz))
-      .forEach(todoz => document.getElementById("td-card-container").innerHTML += todoz)
+    .map(todoz => repeatcard(todoz))
+    .forEach(todoz => document.getElementById("td-card-container").innerHTML += todoz)
 }
 
 
@@ -59,15 +59,16 @@ function saveTask() {
   postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
 }
 
-function getTodosFromBackend(){    
+function getTodosFromBackend() {
   fetch("http://localhost:4000/todos")
-      .then(res => res.json())
-      .then (json => {
-          const todos = json.map(todoz => new ToDo(todoz))
-          displaytodos(todos)})
-      .catch(error => console.log(error))
-                 
-      }
+    .then(res => res.json())
+    .then(json => {
+      const todos = json.map(todoz => new ToDo(todoz))
+      displaytodos(todos)
+    })
+    .catch(error => console.log(error))
+
+}
 
 function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
   var fetchConfig = {
@@ -84,28 +85,28 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
   }
 
   fetch("http://localhost:4000/todos", fetchConfig).then((res) => {
-      if (res.status === 201) {
-        console.log(res.status)
+    if (res.status === 201) {
+      console.log(res.status)
 
-        UIkit.notification({
-          message: "New Task created!",
-          status: "success",
-          pos: "bottom-center",
-          timeout: 3_000,
-        });
-        
-      }
-    });
-  }
+      UIkit.notification({
+        message: "New Task created!",
+        status: "success",
+        pos: "bottom-center",
+        timeout: 3_000,
+      });
+
+    }
+  });
+}
 
 
 // #####################################
 
 
-  function deleteTodo(ToDoId) {
-    // var result = confirm("Are you sure to delete?");
-    // console.log(result)
-    if(confirm("Are you sure to delete?")){
+function deleteTodo(ToDoId) {
+  // var result = confirm("Are you sure to delete?");
+  console.log("DELETE")
+  if (confirm("Are you sure to delete?")) {
     var fetchConfig = {
       method: "DELETE",
       headers: {
@@ -113,26 +114,32 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
       },
       body: JSON.stringify({
         id: ToDoId
-      })}
+      })
     }
 
-    fetch("http://localhost:4000/todos", fetchConfig).then((res) => {
-        console.log(res.status)
-        if (res.status === 204) {
-          
-          
+    console.log("jz wird deleted");
+    fetch("http://localhost:4000/todos", fetchConfig)
+      .then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+
+
           UIkit.notification({
             message: "Task Delete!",
             status: "success",
             pos: "bottom-center",
             timeout: 3_000,
           });
-          
+
         }
+      })
+      .catch((err)=>{
+        console.log(err)
       });
-    }
+  }
+}
 
 // #####################################
 
 
-  getTodosFromBackend()
+getTodosFromBackend()

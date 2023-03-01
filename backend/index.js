@@ -80,10 +80,12 @@ class ToDo {
   function deleteTodos (request, response){
     var { id } = request.body;
     const queryString = "DELETE FROM todos WHERE id = $1;";
-    const res = pgClient.query(queryString, [id], (err, result) => {
-      response.status(204).send(result.rows);
-      // console.log(status)
+    pgClient.query(queryString, [id], (err, result) => {
+      response.status(200).send("DELETED");
+      console.log("GESENDET?")
+      console.log(err)
     })
+    console.log("DELETE END")
   }
 // ###################################################
 
