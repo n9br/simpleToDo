@@ -25,15 +25,25 @@ function repeatcard(todo) {
   return `
     <div class="uk-card uk-card-default uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
         <div class="uk-card-header">
-            <div class="uk-grid-small uk-flex-middle" uk-grid style="display: flex; justify-content: space-between;">
+            <div class="uk-grid-small uk-flex-middle" uk-grid style="display: flex; justify-content: space-even;">
+
+                <div>
+                    <span class="uk-icon uk-padding-small circle" uk-icon="icon: warning"></span>
+                </div>
+
+                <div class="uk-width-auto circle">
+                </div>
+            
+                <div class="uk-width-auto" >
+                    <p class="uk-card-title uk-margin-remove-bottom td-date">${longDate}</p>
+                </div>
                 
+            
                 <div class="uk-width-expand" >
                     <h4 class="uk-card-title uk-margin-remove-bottom">${todo.title}</h4>
                 </div>
 
-                <div class="uk-width-expand" >
-                <p class="uk-card-title uk-margin-remove-bottom td-date">${longDate}</p>
-                </div>
+
 
             </div>
         </div>
