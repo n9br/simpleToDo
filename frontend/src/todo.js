@@ -35,7 +35,7 @@ function repeatcard(todo) {
                 </div>
             
                 <div class="uk-width-auto" >
-                    <p class="uk-card-title uk-margin-remove-bottom td-date">${longDate}</p>
+                    <p class="uk-card-title uk-margin-remove-bottom td-date" style="background: #aad945">${longDate}</p>
                 </div>
                 
             
