@@ -101,7 +101,10 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
 
 // #####################################
 
+
   function deleteTodo(ToDoId) {
+    var result = confirm("Are you sure to delete?");
+    if(true){
     var fetchConfig = {
       method: "DELETE",
       headers: {
@@ -109,19 +112,22 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority) {
       },
       body: JSON.stringify({
         id: ToDoId
-      }),
+      })}
     }
-  
+    // else{
+    //   stop.process
+    // }
+
     fetch("http://localhost:4000/todos", fetchConfig).then((res) => {
         if (res.status === 201) {
           console.log(res.status)
-  
-          UIkit.notification({
-            message: "Task Delete!",
-            status: "success",
-            pos: "bottom-center",
-            timeout: 3_000,
-          });
+          
+          // UIkit.notification({
+          //   message: "Task Delete!",
+          //   status: "success",
+          //   pos: "bottom-center",
+          //   timeout: 3_000,
+          // });
           
         }
       });
