@@ -3,8 +3,8 @@ class ToDo {
   title;
   description;
   due_date;
-  time;
   priority;
+
 
   constructor(data) {
     this.id = data.id;
@@ -15,6 +15,7 @@ class ToDo {
     this.priority = data.priority;
   }
 }
+
 
 function repeatcard(todo) {
   return `
@@ -45,10 +46,12 @@ function repeatcard(todo) {
                   <p>Time :${todo.time}</p>
                   <p>Description:${todo.description}</p>
                   <p> Priority: ${todo.priority}</p>
+                  <span onclick="deleteTodo(${todo.id})" style="cursor: pointer;"  uk-icon="icon: trash"></span>
       </div>
   </div>
     `;
 }
+
 
 function edit() {
   const task_title = localStorage.getItem("titles");
@@ -71,8 +74,10 @@ function edit() {
   console.log(task_priority);
   document.getElementById("card-prio").value = task_priority;
 }
+
 function displaytodos(todo) {
   document.getElementById("td-card-container").innerHTML = null;
+
   todo
     .map((todoz) => repeatcard(todoz))
     .forEach(
@@ -81,11 +86,13 @@ function displaytodos(todo) {
     );
 }
 
+
+
+
 function saveTask() {
   const ToDoTitle = document.getElementById("td-title").value;
   const ToDoDes = document.getElementById("td-todotext").value;
   const ToDo_Due_Date = document.getElementById("td-DueDate").value;
-  const ToDo_time = document.getElementById("td_time").value;
   const ToDo_Priority = document.getElementById("td-prio").value;
 
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
@@ -124,6 +131,10 @@ function updateTask() {
     ToDo_time,
     ToDo_Priority
   );
+
+  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
+
+  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
 }
 
 function getTodosFromBackend() {
@@ -204,8 +215,52 @@ function postToDoToBackend(
         pos: "bottom-center",
         timeout: 3_000,
       });
+
     }
   });
 }
+
+
+// #####################################
+
+
+function deleteTodo(ToDoId) {
+  // var result = confirm("Are you sure to delete?");
+  console.log("DELETE")
+  if (confirm("Are you sure to delete?")) {
+    var fetchConfig = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: ToDoId
+      })
+    }
+
+    console.log("jz wird deleted");
+    fetch("http://localhost:4000/todos", fetchConfig)
+      .then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+
+
+          UIkit.notification({
+            message: "Task Delete!",
+            status: "success",
+            pos: "bottom-center",
+            timeout: 3_000,
+          });
+
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+      });
+  }
+}
+
+// #####################################
+
 
 getTodosFromBackend();

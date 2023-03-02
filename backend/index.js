@@ -71,9 +71,26 @@ function getTodosFromDB(req, response) {
     (err, result) => {
       console.log(result.rows);
       response.send(result.rows);
-    }
-  );
-}
+    })
+  }
+
+
+// ###################################################
+
+
+  function deleteTodos (request, response){
+    var { id } = request.body;
+    const queryString = "DELETE FROM todos WHERE id = $1;";
+    pgClient.query(queryString, [id], (err, result) => {
+      response.status(200).send("DELETED");
+      console.log("GESENDET?")
+      console.log(err)
+    })
+    console.log("DELETE END")
+  }
+// ###################################################
+
+
 
 function postTodoToDB(req, response) {
   const toDo = new ToDo(req.body);
@@ -129,7 +146,10 @@ async function updateTodoToDB(req, res) {
 app.get("/todos", getTodosFromDB);
 
 // Post Todos
-app.post("/todos", postTodoToDB);
+app.post('/todos', postTodoToDB)
+
+// Delete Post
+app.delete('/todos', deleteTodos)
 
 // Hello World
 app.get("/", (req, res) => {
