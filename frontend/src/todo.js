@@ -28,7 +28,7 @@ function repeatcard(todo) {
             <div class="uk-grid-small uk-flex-middle" uk-grid style="display: flex; justify-content: space-even;">
 
                 <div>
-                    <span class="uk-icon uk-padding-small circle" uk-icon="icon: warning"></span>
+                    <span class="uk-icon uk-padding-small uk-width-auto greendot" uk-icon="icon: warning"></span>
                 </div>
 
                 <div class="uk-width-auto circle">
