@@ -35,7 +35,7 @@ function repeatcard(todo) {
   let longDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short", month:"numeric", day:"numeric" });
 
   return `
-  <div class="uk-card uk-card-default" uk-width-1-2@m td-container-center ${highlightclass}" style="margin-bottom: 30px;">
+  <div class="uk-card uk-card-default ${highlightclass} uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
     <div class="uk-card-header">
       <div class="uk-grid-small uk-flex-middle" uk-grid style="display: flex; justify-content: space-even;"> 
       
