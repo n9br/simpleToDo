@@ -134,7 +134,7 @@ function updateTask() {
 
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
 
-  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
+  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
 }
 
 function getTodosFromBackend() {
