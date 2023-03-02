@@ -94,6 +94,7 @@ function saveTask() {
   const ToDoDes = document.getElementById("td-todotext").value;
   const ToDo_Due_Date = document.getElementById("td-DueDate").value;
   const ToDo_Priority = document.getElementById("td-prio").value;
+  const ToDo_time = document.getElementById("td_time").value;
 
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
 
