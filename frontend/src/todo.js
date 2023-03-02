@@ -19,13 +19,23 @@ class ToDo {
 
 function repeatcard(todo) {
 
+  let highlightclass = "";
+  let today = new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
+  let due_date = new Date(todo.due_date).toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
+  // let due_date = new Date(todo.due_date);
+  // console.log("Today: " + today + " - due date: " + due_date);
+  if (due_date === today) {
+    console.log("highlight: " + today + " = due date: " + due_date);
+    highlightclass = "td-today";
+  }
+
   // let longDate = new Date(todo.due_date).toLocaleDateString('en-us', { dateStyle: "medium", timeStyle: "short", timeZone: "", weekday:"short", month:"short", day:"numeric"});
   // let longDate = new Date(todo.due_date);
   // let longDate = new Date(todo.due_date).toLocaleDateString('en-us');
   let longDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short", month:"numeric", day:"numeric" });
 
   return `
-  <div class="uk-card uk-card-default" uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
+  <div class="uk-card uk-card-default" uk-width-1-2@m td-container-center ${highlightclass}" style="margin-bottom: 30px;">
     <div class="uk-card-header">
       <div class="uk-grid-small uk-flex-middle" uk-grid style="display: flex; justify-content: space-even;"> 
       
@@ -68,6 +78,30 @@ function repeatcard(todo) {
       </div>
   </div>
     `;
+
+}
+
+
+function edit() {
+  const task_title = localStorage.getItem("titles");
+  console.log(task_title);
+  document.getElementById("card-title").value = task_title;
+
+  const task_description = localStorage.getItem("Description");
+  console.log(task_description);
+  document.getElementById("card-todotext").value = task_description;
+
+  const task_duedate = localStorage.getItem("Due_date");
+  console.log(task_duedate);
+  document.getElementById("card-DueDate").value = task_duedate;
+
+  const task_time = localStorage.getItem("time");
+  console.log(task_time);
+  document.getElementById("card_time").value = task_time;
+
+  const task_priority = localStorage.getItem("priority");
+  console.log(task_priority);
+  document.getElementById("card-prio").value = task_priority;
 }
 
 
