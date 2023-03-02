@@ -41,3 +41,6 @@ Table:
         -description -> text
         -due_date -> timestamp .. zone
         -priority -> char 255
+Change in Database Table:(Added 2 fields,28.2.2023)
+        -time -> time without timezone
+        -status -> Character, length :255

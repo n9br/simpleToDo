@@ -54,6 +54,7 @@ class ToDo {
     due_date;
     time;
     priority;
+    status;
   
     constructor(data) {
       this.id = data.id;
@@ -62,7 +63,7 @@ class ToDo {
       this.due_date = data.due_date;
       this.time = data.time;
       this.priority = data.priority;
-      
+      this.status=data.status;      
     }
   };
 
@@ -89,8 +90,8 @@ class ToDo {
     response.status(401).send("Please enter title and description!");
   }
 
-  const queryString = "INSERT INTO todos (title, description, due_date, time, priority) VALUES ($1, $2, $3, $4, $5) RETURNING *;";
-  const res = pgClient.query(queryString, [toDo.title, toDo.description, toDo.due_date, toDo.time, toDo.priority], (err,res) => {
+  const queryString = "INSERT INTO todos (title, description, due_date, time, priority, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;";
+  const res = pgClient.query(queryString, [toDo.title, toDo.description, toDo.due_date, toDo.time, toDo.priority, toDo.status], (err,res) => {
     if (res.rows[0].id) { 
       response.status(201).send("Todo created!");
       console.log(res.rows[0]);

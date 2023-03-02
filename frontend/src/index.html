@@ -30,6 +30,10 @@
         label {
             margin: 0.4rem 0;
             }
+    .status_label{
+        display:inline;
+
+    }
 
     </style>  
     <nav class="uk-navbar-container" uk-navbar>
@@ -77,7 +81,7 @@
                 <div class="uk-form-label">Description</div>
                 <textarea 
                         class="uk-textarea" 
-                        rows="5" 
+                        rows="2" 
                         placeholder="your todo here ..." 
                         id="td-todotext"
                         name="text"
@@ -87,7 +91,7 @@
             <div>
 
                 <label for="date">Due_Date:</label>
-                <input type="date" id="td-DueDate" name="due_date">
+                <input type="date" id="td-DueDate" name="due_date" onfocus="this.min=new Date().toISOString().split('T')[0]" max="9999-12-31">
             </div>
             
             <div>
@@ -98,18 +102,22 @@
             </div>
             
             <div>
-
-            <label for="Priority">Priority:</label>
-            <select name="Prio" id="td-prio">
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              
-            </select>
+                <label for="Priority">Priority:</label>
+                <select name="Prio" id="td-prio">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>              
+                </select>
             </div>
 
-            
-        </div>
+    <div >
+        <fieldset>
+            <legend>Status:</legend>          
+                <input type="radio" id="status_pending" name="status" value="Pending" checked><label class="status_label" for="status_pending">Pending</label>
+                <input type="radio" id="status_completed" name="status" value="Completed" disabled><label class ="status_label" for="status_completed">Completed</label>            
+        </fieldset>
+    </div>         
+    </div>
         <div class="uk-modal-footer">
             <div style="display: flex; justify-content: space-around;">
                 <button type="reset" class="uk-button">Reset</button>
@@ -167,7 +175,7 @@
                 <div class="uk-modal-footer">
                     <div style="display: flex; justify-content: space-around;">
                         
-                        <button class="uk-button uk-button-primary" onclick="saveTask()">Update</button>
+                        <button class="uk-button uk-button-primary"></button>Update</button>
                     </div>
                 </div>
             </div>
