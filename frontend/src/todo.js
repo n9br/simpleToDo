@@ -19,6 +19,7 @@ class ToDo {
 
 function repeatcard(todo) {
 
+
   let highlightclass = "";
   let today = new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
   let due_date = new Date(todo.due_date).toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
@@ -30,7 +31,7 @@ function repeatcard(todo) {
   }
 
   return `
-  <div class="uk-card uk-card-default" uk-width-2-2@m td-container-center" style="margin-bottom: 30px;">
+  <div class="uk-card uk-card-default uk-width-2-2@m td-container-center ${highlightclass}" style="margin-bottom: 30px;">
     <div class="uk-card-header">
       <div class="uk-grid-small uk-flex-middle" uk-grid>            
           <div class="uk-width-expand">
