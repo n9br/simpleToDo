@@ -14,13 +14,16 @@
 
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
     <style>
+        .td-date {
+            font-size: small;
+        }
         .td-center {
             text-align: center;
         }
         
         .td-container-center {
-            margin-left: auto;
-            margin-right: auto;
+            margin-left: 5%;
+            margin-right: 15%;
         }
 
         .td-today {
@@ -36,9 +39,28 @@
         label {
             margin: 0.4rem 0;
             }
+        
+        .circle {
+            background: #aad945;
+            border: 0.1875em #0F1C3F;
+            border-radius: 50%;
+            box-shadow: 0.375em 0.375em 0 0 rgba(15, 28, 63, 0.125);
+            height: 1.5em;
+            width: 1.5em;
+        }
+
+        .greendot {
+            height: 25px;
+            width: 25px;
+            background-color: #15b15e;
+            border-radius: 30%;
+            /* display: inline-block; */
+            }
+
+
 
     </style>  
-    <nav class="uk-navbar-container" uk-navbar>
+    <nav class="uk-navbar-container" uk-navbar uk-sticky>
         <div class="uk-navbar-left uk-container">
             <ul class="uk-navbar-nav">
                 <li uk-toggle="target: #create-ToDo-modal"  class="uk-active"><a href="#">Add Task</a></li>
@@ -57,7 +79,7 @@
        
         
         <div class="uk-container"></div>
-    <h1 class="td-center">ToDo</h1>
+    <h2 class="td-center">ToDo</h2>
     <div class="uk-container td-container-center" id="td-card-container">
 </div>
         
@@ -178,6 +200,12 @@
                 </div>
             </div>
         </div>
+
+    <div>
+        <a href="" uk-totop class="uk-align-right"></a>
+    </div>
+    
+
 </body>
 
 

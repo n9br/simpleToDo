@@ -30,12 +30,25 @@ function repeatcard(todo) {
     highlightclass = "td-today";
   }
 
+  // let longDate = new Date(todo.due_date).toLocaleDateString('en-us', { dateStyle: "medium", timeStyle: "short", timeZone: "", weekday:"short", month:"short", day:"numeric"});
+  // let longDate = new Date(todo.due_date);
+  // let longDate = new Date(todo.due_date).toLocaleDateString('en-us');
+  let longDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short", month:"numeric", day:"numeric" });
+
   return `
-  <div class="uk-card uk-card-default uk-width-2-2@m td-container-center ${highlightclass}" style="margin-bottom: 30px;">
+  <div class="uk-card uk-card-default ${highlightclass} uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
     <div class="uk-card-header">
-      <div class="uk-grid-small uk-flex-middle" uk-grid>            
+      <div class="uk-grid-small uk-flex-middle" uk-grid style="display: flex; justify-content: space-even;"> 
+      
+        <div class="uk-width-auto circle">
+        </div>
+
+        <div class="uk-width-auto" >
+            <p class="uk-card-title uk-margin-remove-bottom td-date" style="background: #aad945">${longDate}</p>
+        </div>
+
           <div class="uk-width-expand">
-                    <h3 class="uk-card-title uk-margin-remove-bottom">${
+                    <h4 class="uk-card-title uk-margin-remove-bottom">${
                       todo.title
                     }                      
                     <a href="#" onclick=
@@ -46,8 +59,8 @@ function repeatcard(todo) {
                     localStorage.setItem('time','${todo.time}'),
                     localStorage.setItem('priority','${todo.priority}'),
                     edit()"
-                    uk-toggle="target: #Edit-ToDo-modal" class="uk-icon-link"uk-icon="pencil"></a></h3>
-                    <p hidden>${todo.id}</h2>                    
+                    uk-toggle="target: #Edit-ToDo-modal" class="uk-icon-link"uk-icon="pencil"></a></h4>
+                    <p hidden>${todo.id}</p>                    
           </div>
       </div>
     </div>
