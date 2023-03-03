@@ -18,6 +18,17 @@ class ToDo {
 
 
 function repeatcard(todo) {
+
+  let highlightclass = "";
+  let today = new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
+  let due_date = new Date(todo.due_date).toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
+  // let due_date = new Date(todo.due_date);
+  // console.log("Today: " + today + " - due date: " + due_date);
+  if (due_date === today) {
+    console.log("highlight: " + today + " = due date: " + due_date);
+    highlightclass = "td-today";
+  }
+
   return `
   <div class="uk-card uk-card-default" uk-width-2-2@m td-container-center" style="margin-bottom: 30px;">
     <div class="uk-card-header">
