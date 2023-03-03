@@ -88,7 +88,9 @@ function edit() {
   document.getElementById("card-todotext").value = task_description;
 
   const task_duedate = localStorage.getItem("Due_date");
-  console.log(task_duedate);
+  let isodate = new Date(task_duedate).toISOString().split('T')[0];
+  console.log("task_duedate: " + task_duedate + " - isodate: " + isodate );
+  // console.log(task_duedate);
   document.getElementById("card-DueDate").value = task_duedate;
 
   const task_time = localStorage.getItem("time");
