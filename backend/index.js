@@ -48,22 +48,24 @@ app.use(express.json());
  * id - title - description - due_date - time - priority;
  */
 class ToDo {
-  id;
-  title;
-  description;
-  due_date;
-  time;
-  priority;
-
-  constructor(data) {
-    this.id = data.id;
-    this.title = data.title;
-    this.description = data.description;
-    this.due_date = data.due_date;
-    this.time = data.time;
-    this.priority = data.priority;
-  }
-}
+    id;
+    title;
+    description;
+    due_date;
+    time;
+    priority;
+    status;
+  
+    constructor(data) {
+      this.id = data.id;
+      this.title = data.title;  
+      this.description = data.description;
+      this.due_date = data.due_date;
+      this.time = data.time;
+      this.priority = data.priority;
+      this.status=data.status;  
+    }
+  };
 
 function getTodosFromDB(req, response) {
   pgClient.query(
@@ -109,10 +111,10 @@ function postTodoToDB(req, response) {
   }
 
   const queryString =
-    "INSERT INTO todos (title, description, due_date, time, priority) VALUES ($1, $2, $3, $4, $5) RETURNING *;";
+    "INSERT INTO todos (title, description, due_date, time, priority, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;";
   const res = pgClient.query(
     queryString,
-    [toDo.title, toDo.description, toDo.due_date, toDo.time, toDo.priority],
+    [toDo.title, toDo.description, toDo.due_date, toDo.time, toDo.priority, toDo.status],
     (err, res) => {
       if (res.rows[0].id) {
         response.status(201).send("Todo created!");

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -8,7 +9,7 @@
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script> -->
 
-    
+
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.22/dist/css/uikit.min.css" />
 
@@ -17,10 +18,11 @@
         .td-date {
             font-size: small;
         }
+
         .td-center {
             text-align: center;
         }
-        
+
         .td-container-center {
             margin-left: 5%;
             margin-right: 15%;
@@ -31,15 +33,20 @@
         }
 
         label {
-    display: block;
-    font: 1rem 'Fira Sans', sans-serif;
+            display: block;
+            font: 1rem 'Fira Sans', sans-serif;
         }
 
         input,
         label {
             margin: 0.4rem 0;
-            }
-        
+        }
+
+        .status_label {
+            display: inline;
+
+        }
+
         .circle {
             background: #aad945;
             border: 0.1875em #0F1C3F;
@@ -78,89 +85,90 @@
     <nav class="uk-navbar-container" uk-navbar uk-sticky>
         <div class="uk-navbar-left uk-container">
             <ul class="uk-navbar-nav">
-                <li uk-toggle="target: #create-ToDo-modal"  class="uk-active"><a href="#">Add Task</a></li>
-            </ul>           
+                <li uk-toggle="target: #create-ToDo-modal" class="uk-active"><a href="#">Add Task</a></li>
+            </ul>
             <!-- <ul class="uk-navbar-nav">
                 <li uk-toggle="target: #td-login-modal"  class="uk-active"><a href="#">Login</a></li>
             </ul> -->
         </div>
-    </nav>  
-    
+    </nav>
+
 </head>
 
 <body>
-    
+
     <header>
-       
-        
+
+
         <div class="uk-container"></div>
-    <h2 class="td-center">ToDo</h2>
-    <div class="uk-container td-container-center" id="td-card-container">
-</div>
-        
+        <h2 class="td-center">ToDo</h2>
+        <div class="uk-container td-container-center" id="td-card-container">
+        </div>
+
     </header>
-    
-    
-</div>
 
-<div uk-modal id="create-ToDo-modal">
-    <div class="uk-modal-dialog uk-margin-auto-vertical">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-header">
-            <h2 class="uk-modal-title">New Task</h2>
-        </div>
 
-        <div class="uk-modal-body">
-            <div class="uk-margin">
-                <div class="uk-form-label">Title</div>
-                <input class="uk-input" id="td-title" name="user" placeholder="Title"/>
+    </div>
+
+    <div uk-modal id="create-ToDo-modal">
+        <div class="uk-modal-dialog uk-margin-auto-vertical">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">New Task</h2>
             </div>
 
-            <div class="uk-margin">
-                <div class="uk-form-label">Description</div>
-                <textarea 
-                        class="uk-textarea" 
-                        rows="5" 
-                        placeholder="your todo here ..." 
-                        id="td-todotext"
-                        name="text"
+            <div class="uk-modal-body">
+                <div class="uk-margin">
+                    <div class="uk-form-label">Title</div>
+                    <input class="uk-input" id="td-title" name="user" placeholder="Title" />
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-form-label">Description</div>
+                    <textarea class="uk-textarea" rows="2" placeholder="your todo here ..." id="td-todotext" name="text"
                         aria-label="Textarea"></textarea>
-            </div>
-            
-            <div>
+                </div>
 
-                <label for="date">Due_Date:</label>
-                <input type="date" id="td-DueDate" name="due_date">
-            </div>
-            
-            <div>
+                <div>
 
-                <label for="appt">Choose a time for your task :</label>
-                <input type="time" id="td_time" name="appt"
-                     required>
-            </div>
-            
-            <div>
+                    <label for="date">Due_Date:</label>
+                    <input type="date" id="td-DueDate" name="due_date"
+                        onfocus="this.min=new Date().toISOString().split('T')[0]" max="9999-12-31">
+                </div>
 
-            <label for="Priority">Priority:</label>
-            <select name="Prio" id="td-prio">
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              
-            </select>
-            </div>
+                <div>
 
-            
-        </div>
-        <div class="uk-modal-footer">
-            <div style="display: flex; justify-content: space-around;">
-                <button type="reset" class="uk-button">Reset</button>
-                <button class="uk-button uk-button-primary" onclick="saveTask()">Save</button>
+                    <label for="appt">Choose a time for your task :</label>
+                    <input type="time" id="td_time" name="appt" required>
+                </div>
+
+                <div>
+                    <label for="Priority">Priority:</label>
+                    <select name="Prio" id="td-prio">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+                <div>
+                    <fieldset>
+                        <legend>Status:</legend>
+                        <input type="radio" id="status_pending" name="status" value="Pending" checked><label
+                            class="status_label" for="status_pending">Pending</label>
+                        <input type="radio" id="status_completed" name="status" value="Completed" disabled><label
+                            class="status_label" for="status_completed">Completed</label>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="uk-modal-footer">
+                <div style="display: flex; justify-content: space-around;">
+                    <button type="reset" class="uk-button">Reset</button>
+                    <button class="uk-button uk-button-primary" onclick="saveTask()">Save</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -189,7 +197,7 @@
                         </div>                       
                         <div>
                             <label for="date">Due_Date:</label>
-                            <input type="date" id="card-DueDate" name="due_date" onfocus="this.min=new Date().toISOString().split('T')[0]" max="9999-12-31">
+                            <input type="date" id="card-DueDate" name="due_date">
                         </div>
                         
                         <div>    
@@ -215,12 +223,6 @@
                 </div>
             </div>
         </div>
-
-    <div>
-        <a href="" uk-totop class="uk-align-right"></a>
-    </div>
-    
-
 </body>
 
 
@@ -231,4 +233,5 @@
 
 <!-- <script src='main.js'></script> -->
 <script src="todo.js"></script>
+
 </html>
