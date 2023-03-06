@@ -48,33 +48,12 @@ app.use(express.json());
  * id - title - description - due_date - time - priority;
  */
 class ToDo {
-<<<<<<< HEAD
   id;
   title;
   description;
   due_date;
   time;
   priority;
-=======
-    id;
-    title;
-    description;
-    due_date;
-    time;
-    priority;
-    status;
-  
-    constructor(data) {
-      this.id = data.id;
-      this.title = data.title;  
-      this.description = data.description;
-      this.due_date = data.due_date;
-      this.time = data.time;
-      this.priority = data.priority;
-      this.status=data.status;      
-    }
-  };
->>>>>>> b1dacfe (Added time field)
 
   constructor(data) {
     this.id = data.id;
