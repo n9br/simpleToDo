@@ -20,8 +20,6 @@ npm install nodejs
 npm install pg
 create index.js (Test) > node .\index.js // should output 'hello from backend - index.js'
 http://localhost:4000
-install nodemon (npm i nodemon -D)
-npm run start
 
  simpleToDo  git add .  
 warning: in the working copy of 'backend/package.json', LF will be replaced by CRLF the next time Git touches it

@@ -354,3 +354,5 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,node,visualstudiocode
 backend/package-lock.json
+.idea/
+frontend/src/test.txt

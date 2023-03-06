@@ -14,22 +14,13 @@
 
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
     <style>
-        .td-date {
-            font-size: small;
-        }
         .td-center {
             text-align: center;
         }
-        
         .td-container-center {
-            margin-left: 5%;
-            margin-right: 15%;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .td-today {
-            background-color: lightskyblue;
-        }
-
         label {
     display: block;
     font: 1rem 'Fira Sans', sans-serif;
@@ -39,25 +30,10 @@
         label {
             margin: 0.4rem 0;
             }
-        
-        .circle {
-            background: #aad945;
-            border: 0.1875em #0F1C3F;
-            border-radius: 50%;
-            box-shadow: 0.375em 0.375em 0 0 rgba(15, 28, 63, 0.125);
-            height: 1.5em;
-            width: 1.5em;
-        }
+    .status_label{
+        display:inline;
 
-        .greendot {
-            height: 25px;
-            width: 25px;
-            background-color: #15b15e;
-            border-radius: 30%;
-            /* display: inline-block; */
-            }
-
-
+    }
 
     .status_label{
         display:inline;
@@ -65,7 +41,7 @@
     }
 
     </style>  
-    <nav class="uk-navbar-container" uk-navbar uk-sticky>
+    <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left uk-container">
             <ul class="uk-navbar-nav">
                 <li uk-toggle="target: #create-ToDo-modal"  class="uk-active"><a href="#">Add Task</a></li>
@@ -84,7 +60,7 @@
        
         
         <div class="uk-container"></div>
-    <h2 class="td-center">ToDo</h2>
+    <h1 class="td-center">ToDo</h1>
     <div class="uk-container td-container-center" id="td-card-container">
 </div>
         
@@ -168,7 +144,7 @@
                     <div class="uk-modal-body">
                         <div class="uk-margin">
                             <div class="uk-form-label">Title</div>
-                            <input class="uk-input" id="card-title" name="user" placeholder="Title"/>
+                            <input class="uk-input" id="td-title" name="user" placeholder="Title"/>
                         </div>
     
                         <div class="uk-margin">
@@ -177,23 +153,23 @@
                                     class="uk-textarea" 
                                     rows="5" 
                                     placeholder="your todo here ..." 
-                                    id="card-todotext"
+                                    id="td-todotext"
                                     name="text"
                                     aria-label="Textarea"></textarea>
                         </div>                       
                         <div>
                             <label for="date">Due_Date:</label>
-                            <input type="date" id="card-DueDate" name="due_date" onfocus="this.min=new Date().toISOString().split('T')[0]" max="9999-12-31">
+                            <input type="date" id="td-DueDate" name="due_date">
                         </div>
                         
                         <div>    
                             <label for="appt">Choose a time for your task :</label>
-                            <input type="time" id="card_time" name="appt"
+                            <input type="time" id="td_time" name="appt"
                                  required>
                         </div>                        
                         <div>    
                         <label for="Priority">Priority:</label>
-                        <select name="Prio" id="card-prio">
+                        <select name="Prio" id="td-prio">
                           <option value="low">Low</option>
                           <option value="medium">Medium</option>
                           <option value="high">High</option>
@@ -204,17 +180,11 @@
                 <div class="uk-modal-footer">
                     <div style="display: flex; justify-content: space-around;">
                         
-                        <button class="uk-button uk-button-primary" onclick="updateTask()">Update</button>
+                        <button class="uk-button uk-button-primary"></button>Update</button>
                     </div>
                 </div>
             </div>
         </div>
-
-    <div>
-        <a href="" uk-totop class="uk-align-right"></a>
-    </div>
-    
-
 </body>
 
 
