@@ -48,12 +48,33 @@ app.use(express.json());
  * id - title - description - due_date - time - priority;
  */
 class ToDo {
+<<<<<<< HEAD
   id;
   title;
   description;
   due_date;
   time;
   priority;
+=======
+    id;
+    title;
+    description;
+    due_date;
+    time;
+    priority;
+    status;
+  
+    constructor(data) {
+      this.id = data.id;
+      this.title = data.title;  
+      this.description = data.description;
+      this.due_date = data.due_date;
+      this.time = data.time;
+      this.priority = data.priority;
+      this.status=data.status;      
+    }
+  };
+>>>>>>> b1dacfe (Added time field)
 
   constructor(data) {
     this.id = data.id;
@@ -108,6 +129,7 @@ function postTodoToDB(req, response) {
     response.status(401).send("Please enter title and description!");
   }
 
+<<<<<<< HEAD
   const queryString =
     "INSERT INTO todos (title, description, due_date, time, priority) VALUES ($1, $2, $3, $4, $5) RETURNING *;";
   const res = pgClient.query(
@@ -139,6 +161,15 @@ async function updateTodoToDB(req, res) {
     res.send("OK");
   } catch (error) {
     console.error(error.stack);
+=======
+  const queryString = "INSERT INTO todos (title, description, due_date, time, priority, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;";
+  const res = pgClient.query(queryString, [toDo.title, toDo.description, toDo.due_date, toDo.time, toDo.priority, toDo.status], (err,res) => {
+    if (res.rows[0].id) { 
+      response.status(201).send("Todo created!");
+      console.log(res.rows[0]);
+       } 
+  });
+>>>>>>> b1dacfe (Added time field)
   }
 }
 

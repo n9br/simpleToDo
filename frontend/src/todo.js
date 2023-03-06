@@ -165,6 +165,7 @@ function updateTask() {
   postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
 }
 
+
 function getTodosFromBackend() {
   fetch("http://localhost:4000/todos")
     .then((res) => res.json())
@@ -230,6 +231,7 @@ function postToDoToBackend(
       due_date: ToDo_Due_Date,
       time: ToDo_time,
       priority: ToDo_Priority,
+      status : ToDo_status,
     }),
   };
 
