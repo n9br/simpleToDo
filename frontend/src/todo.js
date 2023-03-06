@@ -3,8 +3,10 @@ class ToDo {
   title;
   description;
   due_date;
+  time;
   priority;
-
+  status;
+ 
 
   constructor(data) {
     this.id = data.id;
@@ -13,6 +15,7 @@ class ToDo {
     this.due_date = new Date(data.due_date);
     this.time = data.time;
     this.priority = data.priority;
+    this.status = data.status;
   }
 }
 
@@ -73,6 +76,7 @@ function repeatcard(todo) {
                   <p>Time :${todo.time}</p>
                   <p>Description:${todo.description}</p>
                   <p> Priority: ${todo.priority}</p>
+                  <p> Status: ${todo.status}</p>
                   <span onclick="deleteTodo(${todo.id})" style="cursor: pointer;"  uk-icon="icon: trash"></span>
       </div>
   </div>
@@ -125,6 +129,12 @@ function saveTask() {
   const ToDo_Due_Date = document.getElementById("td-DueDate").value;
   const ToDo_Priority = document.getElementById("td-prio").value;
   const ToDo_time = document.getElementById("td_time").value;
+  var ToDo_status;
+      if(document.getElementById('status_pending').checked) {   
+          ToDo_status = document.getElementById('status_pending').value;  }  
+      else{
+        if(document.getElementById('status_completed').checked) {   
+            ToDo_status = document.getElementById('status_completed').value; }}
 
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
 
@@ -151,7 +161,8 @@ function updateTask() {
     ToDoDes,
     ToDo_Due_Date,
     ToDo_time,
-    ToDo_Priority
+    ToDo_Priority,
+    ToDo_status
   );
 
   updateTodoToDB(
@@ -165,10 +176,10 @@ function updateTask() {
 
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
 
-  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
+  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority, ToDo_status);
 }
 
-function getTodosFromBackend() {
+function getTodosFromBackend(){    
   fetch("http://localhost:4000/todos")
     .then((res) => res.json())
     .then((json) => {
@@ -215,13 +226,7 @@ function updateTodoToDB(
   });
 }
 
-function postToDoToBackend(
-  ToDoTitle,
-  ToDoDes,
-  ToDo_Due_Date,
-  ToDo_time,
-  ToDo_Priority
-) {
+function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority, ToDo_status) {
   var fetchConfig = {
     method: "POST",
     headers: {
@@ -233,6 +238,7 @@ function postToDoToBackend(
       due_date: ToDo_Due_Date,
       time: ToDo_time,
       priority: ToDo_Priority,
+      status : ToDo_status,
     }),
   };
 
