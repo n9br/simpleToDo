@@ -56,17 +56,16 @@ function repeatcard(todo) {
                     <h4 class="uk-card-title uk-margin-remove-bottom">${
                       todo.title
                     }                      
-                      <a href="#" onclick=
-                          "localStorage.setItem('id','${todo.id}'),
-                          localStorage.setItem('titles','${todo.title}'),
-                          localStorage.setItem('Description','${todo.description}'), 
-                          localStorage.setItem('Due_date','${todo.due_date}'),
-                          localStorage.setItem('time','${todo.time}'),
-                          localStorage.setItem('priority','${todo.priority}'),
-                          edit()"
-                          uk-toggle="target: #Edit-ToDo-modal" class="uk-icon-link"uk-icon="pencil">
-                      </a>
-                    </h4>
+                    <a href="#" onclick=
+                    "localStorage.setItem('id','${todo.id}'),
+                    localStorage.setItem('titles','${todo.title}'),
+                    localStorage.setItem('Description','${todo.description}'), 
+                    localStorage.setItem('Due_date','${todo.due_date}'),
+                    localStorage.setItem('time','${todo.time}'),
+                    localStorage.setItem('priority','${todo.priority}'),
+                    localStorage.setItem('status', '${todo.status}'),
+                    edit()"
+                    uk-toggle="target: #Edit-ToDo-modal" class="uk-icon-link"uk-icon="pencil"></a></h4>
                     <p hidden>${todo.id}</p>                    
           </div>
       </div>
@@ -109,6 +108,13 @@ function edit() {
   const task_priority = localStorage.getItem("priority");
   console.log(task_priority);
   document.getElementById("card-prio").value = task_priority;
+
+
+  const task_status = localStorage.getItem("status");
+  console.log(task_status);
+      //if(task_status == "Pending"){
+      document.getElementById("card_status_pending").checked;
+      //}
 }
 
 function displaytodos(todo) {
@@ -157,7 +163,14 @@ function updateTask() {
   const ToDo_Due_Date = document.getElementById("card-DueDate").value;
   const ToDo_time = document.getElementById("card_time").value;
   const ToDo_Priority = document.getElementById("card-prio").value;
-
+  var ToDo_status;
+      if(document.getElementById('card_status_pending').checked) {   
+          ToDo_status = document.getElementById('card_status_pending').value;  }  
+      else{
+        if(document.getElementById('card_status_completed').checked) {   
+            ToDo_status = document.getElementById('card_status_completed').value; 
+          }
+        }
   console.log(
     ToDoid,
     ToDoTitle,
@@ -165,6 +178,7 @@ function updateTask() {
     ToDo_Due_Date,
     ToDo_time,
     ToDo_Priority,
+    ToDo_status,
     
   );
 
@@ -174,12 +188,11 @@ function updateTask() {
     ToDoDes,
     ToDo_Due_Date,
     ToDo_time,
-    ToDo_Priority
+    ToDo_Priority,
+    ToDo_status,
   );
 
-  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
-
-  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
+  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date,ToDo_time, ToDo_Priority,ToDo_status);
 }
 
 function getTodosFromBackend(){    
@@ -198,7 +211,8 @@ function updateTodoToDB(
   ToDoDes,
   ToDo_Due_Date,
   ToDo_time,
-  ToDo_Priority
+  ToDo_Priority,
+  ToDo_status
 ) {
   var fetchConfig = {
     method: "PUT",
@@ -212,6 +226,7 @@ function updateTodoToDB(
       due_date: ToDo_Due_Date,
       time: ToDo_time,
       priority: ToDo_Priority,
+      status: ToDo_status,
     }),
   };
 

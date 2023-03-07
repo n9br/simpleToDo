@@ -189,7 +189,7 @@
                             <div class="uk-form-label">Description</div>
                             <textarea 
                                     class="uk-textarea" 
-                                    rows="5" 
+                                    rows="2" 
                                     placeholder="your todo here ..." 
                                     id="card-todotext"
                                     name="text"
@@ -213,7 +213,18 @@
                           <option value="high">High</option>
                           
                         </select>
-                        </div>                        
+                        </div>      
+                        
+                        <div>
+                            <fieldset>
+                                <legend>Status:</legend>
+                                <input type="radio" id="card_status_pending" name="status" value="Pending"><label
+                                    class="status_label" for="status_pending">Pending</label>
+                                <input type="radio" id="card_status_completed" name="status" value="Completed"><label
+                                    class="status_label" for="status_completed">Completed</label>
+                            </fieldset>
+                        </div>
+
                     </div>
                 <div class="uk-modal-footer">
                     <div style="display: flex; justify-content: space-around;">
