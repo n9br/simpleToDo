@@ -71,11 +71,8 @@ function repeatcard(todo) {
                   <p>Time :${todo.time}</p>
                   <p>Description:${todo.description}</p>
                   <p> Priority: ${todo.priority}</p>
-                  
-                  <a href="#" onclick= "localStorage.setItem('id','${todo.id}')">
-                  <li uk-toggle="target: #create-delete-modal"  class="uk-active">
-                  <span s style="cursor: pointer;"  uk-icon="icon: trash"></span></li></a>
-                    
+                  <a href="#" onclick= "localStorage.setItem('id','${todo.id}')"
+                    uk-toggle="target: #create-delete-modal"  class="uk-active" uk-icon="icon: trash"></a>
       </div>
   </div>
     `;
@@ -250,7 +247,6 @@ function postToDoToBackend(
 }
 
 
-// #####################################
 
 
 function deleteTodo() {
@@ -292,7 +288,7 @@ function deleteTodo() {
   }
 // }
 
-// #####################################
+
 
 
 getTodosFromBackend();
