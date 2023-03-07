@@ -112,9 +112,12 @@ function edit() {
 
   const task_status = localStorage.getItem("status");
   console.log(task_status);
-      //if(task_status == "Pending"){
-      document.getElementById("card_status_pending").checked;
-      //}
+      if(task_status == "Pending"){
+      document.getElementById("card_status_pending").checked =true;
+      }
+      else if(task_status == "Completed"){
+      document.getElementById("card_status_completed").checked =true;
+      }
 }
 
 function displaytodos(todo) {
