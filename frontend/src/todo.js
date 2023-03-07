@@ -71,8 +71,11 @@ function repeatcard(todo) {
                   <p>Time :${todo.time}</p>
                   <p>Description:${todo.description}</p>
                   <p> Priority: ${todo.priority}</p>
-                  <li uk-toggle="target: #create-delete-modal"  class="uk-active"><a href="#"><span s style="cursor: pointer;"  uk-icon="icon: trash"></span></a></li>
-
+                  
+                  <a href="#" onclick= "localStorage.setItem('id','${todo.id}')">
+                  <li uk-toggle="target: #create-delete-modal"  class="uk-active">
+                  <span s style="cursor: pointer;"  uk-icon="icon: trash"></span></li></a>
+                    
       </div>
   </div>
     `;
@@ -250,9 +253,11 @@ function postToDoToBackend(
 // #####################################
 
 
-function deleteTodo(ToDoId) {
+function deleteTodo() {
+  ToDoId = localStorage.getItem('id');
   // var result = confirm("Are you sure to delete?");
   console.log("DELETE id: "+ ToDoId)
+
 
   // if (confirm("Are you sure to delete?")) {
     var fetchConfig = {
