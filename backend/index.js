@@ -127,8 +127,8 @@ function postTodoToDB(req, response) {
 async function updateTodoToDB(req, res) {
   const toDo = new ToDo(req.body);
   const query = `UPDATE "todos" 
-                 SET "title" = $1, "description" = $2, "priority" = $3, "due_date" = $4, "time" = $5
-                 WHERE "id" = $6`;
+                 SET "title" = $1, "description" = $2, "priority" = $3, "due_date" = $4, "time" = $5, "status" = $6
+                 WHERE "id" = $7`;
   try {
     await pgClient.query(query, [
       toDo.title,
@@ -136,6 +136,7 @@ async function updateTodoToDB(req, res) {
       toDo.priority,
       toDo.due_date,
       toDo.time,
+      toDo.status,
       toDo.id,
     ]); // sends queries
     res.send("OK");
