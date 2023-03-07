@@ -135,14 +135,15 @@ function saveTask() {
         if(document.getElementById('status_completed').checked) {   
             ToDo_status = document.getElementById('status_completed').value; }}
 
-  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
+  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority,ToDo_status);
 
   postToDoToBackend(
     ToDoTitle,
     ToDoDes,
     ToDo_Due_Date,
     ToDo_time,
-    ToDo_Priority
+    ToDo_Priority,
+    ToDo_status
   );
 }
 
@@ -161,7 +162,7 @@ function updateTask() {
     ToDo_Due_Date,
     ToDo_time,
     ToDo_Priority,
-    ToDo_status
+    
   );
 
   updateTodoToDB(
@@ -175,7 +176,7 @@ function updateTask() {
 
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_Priority);
 
-  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority, ToDo_status);
+  postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority);
 }
 
 function getTodosFromBackend(){    
