@@ -54,15 +54,17 @@ function repeatcard(todo) {
                     <h4 class="uk-card-title uk-margin-remove-bottom">${
                       todo.title
                     }                      
-                    <a href="#" onclick=
-                    "localStorage.setItem('id','${todo.id}'),
-                    localStorage.setItem('titles','${todo.title}'),
-                    localStorage.setItem('Description','${todo.description}'), 
-                    localStorage.setItem('Due_date','${todo.due_date}'),
-                    localStorage.setItem('time','${todo.time}'),
-                    localStorage.setItem('priority','${todo.priority}'),
-                    edit()"
-                    uk-toggle="target: #Edit-ToDo-modal" class="uk-icon-link"uk-icon="pencil"></a></h4>
+                      <a href="#" onclick=
+                          "localStorage.setItem('id','${todo.id}'),
+                          localStorage.setItem('titles','${todo.title}'),
+                          localStorage.setItem('Description','${todo.description}'), 
+                          localStorage.setItem('Due_date','${todo.due_date}'),
+                          localStorage.setItem('time','${todo.time}'),
+                          localStorage.setItem('priority','${todo.priority}'),
+                          edit()"
+                          uk-toggle="target: #Edit-ToDo-modal" class="uk-icon-link"uk-icon="pencil">
+                      </a>
+                    </h4>
                     <p hidden>${todo.id}</p>                    
           </div>
       </div>
@@ -93,9 +95,10 @@ function edit() {
 
   const task_duedate = localStorage.getItem("Due_date");
   let isodate = new Date(task_duedate).toISOString().split('T')[0];
+  let d = new Date(task_duedate);
   console.log("task_duedate: " + task_duedate + " - isodate: " + isodate );
-  // console.log(task_duedate);
-  document.getElementById("card-DueDate").value = task_duedate;
+  let datestring = d.getFullYear().toString().padStart(4, '0') + '-' + (d.getMonth()+1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0');
+  document.getElementById("card-DueDate").value = datestring;
 
   const task_time = localStorage.getItem("time");
   console.log(task_time);
