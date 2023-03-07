@@ -33,21 +33,23 @@ function repeatcard(todo) {
     highlightclass = "td-today";
   }
 
-  // let longDate = new Date(todo.due_date).toLocaleDateString('en-us', { dateStyle: "medium", timeStyle: "short", timeZone: "", weekday:"short", month:"short", day:"numeric"});
-  // let longDate = new Date(todo.due_date);
-  // let longDate = new Date(todo.due_date).toLocaleDateString('en-us');
-  let longDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short", month:"numeric", day:"numeric" });
+  // let displayDate = new Date(todo.due_date).toLocaleDateString('en-us', { dateStyle: "medium", timeStyle: "short", timeZone: "", weekday:"short", month:"short", day:"numeric"});
+  // let displayDate = new Date(todo.due_date);
+  // let displayDate = new Date(todo.due_date).toLocaleDateString('en-us');
+  let displayDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short", month:"numeric", day:"numeric" });
+
+  let prioMark = todo.priority
 
   return `
   <div class="uk-card uk-card-default ${highlightclass} uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
     <div class="uk-card-header">
       <div class="uk-grid-small uk-flex-middle" uk-grid style="display: flex; justify-content: space-even;"> 
       
-        <div class="uk-width-auto circle">
+        <div class="uk-width-auto ${prioMark}">
         </div>
 
         <div class="uk-width-auto" >
-            <p class="uk-card-title uk-margin-remove-bottom td-date" style="background: #aad945">${longDate}</p>
+            <p class="uk-card-title uk-margin-remove-bottom td-date" style="background: #aad945">${displayDate}</p>
         </div>
 
           <div class="uk-width-expand">
