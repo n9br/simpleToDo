@@ -22,7 +22,6 @@ class ToDo {
 
 function repeatcard(todo) {
 
-
   let highlightclass = "";
   let today = new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
   let due_date = new Date(todo.due_date).toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
@@ -131,15 +130,42 @@ function displaytodos(todo) {
     );
 }
 
-
-
-
 function saveTask() {
   const ToDoTitle = document.getElementById("td-title").value;
-  const ToDoDes = document.getElementById("td-todotext").value;
+      if (ToDoTitle == ""){
+        alert("Please fill title");
+        document.getElementById("td-title").focus();
+        return false;
+      } 
+
+  const ToDoDes = document.getElementById("td-todotext").value
+      if(ToDoDes== ""){
+        alert("Please fill Description");
+        document.getElementById("td-todotext").focus();
+        return false;
+      }
+      
   const ToDo_Due_Date = document.getElementById("td-DueDate").value;
-  const ToDo_Priority = document.getElementById("td-prio").value;
+      if(ToDo_Due_Date == ""){
+        alert("Please fill DueDate");
+        document.getElementById("td-DueDate").focus();
+        return false;
+      }
+
+  const ToDo_Priority = document.getElementById("td-prio").value
+      if(ToDo_Priority== ""){
+        alert("Please fill Priority");
+        document.getElementById("td-prio").focus();
+        return false;
+      }
+      
+  
   const ToDo_time = document.getElementById("td_time").value;
+      if (ToDo_time ==""){
+        alert("Please fill Time");
+        document.getElementById("td_time").focus();
+        return false;
+      }
   var ToDo_status;
       if(document.getElementById('status_pending').checked) {   
           ToDo_status = document.getElementById('status_pending').value;  }  
@@ -148,7 +174,7 @@ function saveTask() {
             ToDo_status = document.getElementById('status_completed').value; }}
 
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority,ToDo_status);
-
+ 
   postToDoToBackend(
     ToDoTitle,
     ToDoDes,
@@ -158,6 +184,15 @@ function saveTask() {
     ToDo_status
   );
 }
+
+function reset(){
+  document.getElementById("td-title").value = "";
+  document.getElementById("td-todotext").value = "";
+  document.getElementById("td-DueDate").value = "";
+  document.getElementById("td_time").value = "";
+  document.getElementById("td-prio").value = "low"
+ }
+
 
 function updateTask() {
   const ToDoid = localStorage.getItem("id");
@@ -273,7 +308,8 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Pr
         pos: "bottom-center",
         timeout: 3_000,
       });
-
+      reset();
+      getTodosFromBackend();
     }
   });
 }
@@ -319,8 +355,4 @@ function deleteTodo() {
       });
   }
 // }
-
-
-
-
 getTodosFromBackend();
