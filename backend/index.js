@@ -68,9 +68,30 @@ class ToDo {
   };
 
 function getTodosFromDB(req, response) {
-  pgClient.query(
-    "SELECT * FROM todos ORDER BY due_date ASC",
-    (err, result) => {
+
+    sort=(new RegExp('[?&]'+encodeURIComponent(sort)+'=([^&]*)')).exec(location.search)
+    console.log(sort)
+    console.log(decodeURIComponent(sort[1]));
+
+  const sortOrder = "date-asc";
+
+  if ( req ) {  const sortOrder = req;  }
+  else {  const sortOrder = "date-asc"; }
+
+  switch (sortOrder) {
+    case 'date-asc':
+      orderString = " ORDER BY due_date ASC";
+    
+    default:
+      orderString = " ORDER BY due_date ASC";
+  }
+
+  let selectString = "SELECT * FROM todos "
+
+  let queryString = selectString + orderString;
+  console.log(queryString);
+
+  pgClient.query( queryString, (err, result) => {
       console.log(result.rows);
       response.send(result.rows);
     })
