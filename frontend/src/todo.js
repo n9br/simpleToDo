@@ -198,6 +198,13 @@ function updateTask() {
   console.log(ToDoTitle, ToDoDes, ToDo_Due_Date,ToDo_time, ToDo_Priority,ToDo_status);
 }
 
+function toggleSort() {
+  if ( ! localStorage.getItem("sortOrder")) {
+    localStorage.setItem('sortOrder','date-asc');
+    getTodosFromBackend();
+  }
+}
+
 function getTodosFromBackend(){    
   fetch("http://localhost:4000/todos")
     .then((res) => res.json())
