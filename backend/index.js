@@ -69,7 +69,7 @@ class ToDo {
 
 function getTodosFromDB(req, response) {
   pgClient.query(
-    "SELECT * FROM todos ORDER BY due_date DESC",
+    "SELECT * FROM todos ORDER BY due_date ASC",
     (err, result) => {
       console.log(result.rows);
       response.send(result.rows);
