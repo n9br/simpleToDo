@@ -69,21 +69,17 @@ class ToDo {
 
 function getTodosFromDB(req, response) {
 
-    sort=(new RegExp('[?&]'+encodeURIComponent(sort)+'=([^&]*)')).exec(location.search)
-    console.log(sort)
-    console.log(decodeURIComponent(sort[1]));
-
-  const sortOrder = "date-asc";
-
-  if ( req ) {  const sortOrder = req;  }
-  else {  const sortOrder = "date-asc"; }
-
+  console.log(req);
+  const sortOrder = 'date-asc'
+  if ( req ) { sortOrder = req; }
+  console.log(sortOrder);
+  
   switch (sortOrder) {
     case 'date-asc':
-      orderString = " ORDER BY due_date ASC";
+      orderString = " ORDER BY due_date ASC;";
     
     default:
-      orderString = " ORDER BY due_date ASC";
+      orderString = " ORDER BY due_date ASC;";
   }
 
   let selectString = "SELECT * FROM todos "
@@ -93,7 +89,7 @@ function getTodosFromDB(req, response) {
 
   pgClient.query( queryString, (err, result) => {
       console.log(result.rows);
-      response.send(result.rows);
+      // response.send(result.rows);
     })
   }
 
@@ -167,7 +163,13 @@ async function updateTodoToDB(req, res) {
 }
 
 // Get Todos
-app.get("/todos", getTodosFromDB);
+app.get('/todos', (req, res) => {
+  const sort = req.query.sort;
+  console.log(sort)
+  getTodosFromDB()
+  // getTodosFromDB(sort)
+  } 
+);
 
 // Post Todos
 app.post('/todos', postTodoToDB)
