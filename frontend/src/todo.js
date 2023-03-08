@@ -23,6 +23,7 @@ class ToDo {
 function repeatcard(todo) {
 
   let highlightclass = "";
+  let userLang = navigator.language || navigator.userLanguage;
   let today = new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
   let due_date = new Date(todo.due_date).toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
   // let due_date = new Date(todo.due_date);
@@ -35,8 +36,10 @@ function repeatcard(todo) {
   // let displayDate = new Date(todo.due_date).toLocaleDateString('en-us', { dateStyle: "medium", timeStyle: "short", timeZone: "", weekday:"short", month:"short", day:"numeric"});
   // let displayDate = new Date(todo.due_date);
   // let displayDate = new Date(todo.due_date).toLocaleDateString('en-us');
-  let displayDate = new Date(todo.due_date).toLocaleDateString('de-de', { weekday:"short", month:"numeric", day:"numeric" });
+  let displayDate = new Date(todo.due_date).toLocaleDateString(userLang, { weekday:"short", month:"numeric", day:"numeric" });
 
+  // console.log("Todo-Time of " + todo.title + " is : " + todo.time.substr(0,5) + " of type " + typeof(todo.time));
+  let cardTime = todo.time.substr(0,5)
   let prioMark = todo.priority
 
   return `
@@ -47,8 +50,9 @@ function repeatcard(todo) {
         <div class="uk-width-auto ${prioMark}">
         </div>
 
-        <div class="uk-width-auto" >
-            <p class="uk-card-title uk-margin-remove-bottom td-date">${displayDate}</p>
+        <div class="uk-width-auto" style="font-weight: 600">
+            <div class="uk-card-title uk-margin-remove-bottom td-date">${displayDate}</div>
+            <div class="uk-card-title uk-margin-remove-bottom td-date">${cardTime}</div>
         </div>
 
           <div class="uk-width-expand">
