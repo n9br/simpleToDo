@@ -9,6 +9,7 @@ const { Client } = require("pg");
 const express = require("express");
 const { request } = require("http");
 const { title } = require("process");
+const { query } = require("express");
 
 const app = express();
 const port = 4000;
@@ -67,32 +68,42 @@ class ToDo {
     }
   };
 
-function getTodosFromDB(req, response) {
+  function getTodosFromDB(req, response, sortOrder) {
+    let orderString = "";
 
-  console.log(req);
-  const sortOrder = 'date-asc'
-  if ( req ) { sortOrder = req; }
-  console.log(sortOrder);
-  
+  console.log("In getTodosFromDB received sortOrder " + sortOrder);
+
   switch (sortOrder) {
     case 'date-asc':
-      orderString = " ORDER BY due_date ASC;";
+      console.log('orderString = "ORDER BY due_date ASC" - case date-asc');
+      orderString = "ORDER BY due_date ASC";
+      break;
+
+    case 'prio-desc':
+      console.log('orderString = "ORDER BY priority DESC"- case prio-desc');
+      orderString = "ORDER BY priority DESC";
+      break;
     
     default:
-      orderString = " ORDER BY due_date ASC;";
+      console.log('orderString = "ORDER BY due_date ASC" - default - case');
+      orderString = "ORDER BY due_date ASC;";
+      break;
   }
 
-  let selectString = "SELECT * FROM todos "
-
+  let selectString = "SELECT * FROM todos ";
   let queryString = selectString + orderString;
-  console.log(queryString);
 
   pgClient.query( queryString, (err, result) => {
-      console.log(result.rows);
-      // response.send(result.rows);
+      console.log("--------");
+      result.rows.map(logDatePrio);
+      console.log("--------");
+      response.send(result.rows);
     })
   }
 
+  function logDatePrio(toDo) {
+    console.log(toDo.id + " - " + new Date(toDo.due_date).toLocaleDateString() + " - " + toDo.priority)
+  }
 
 // ###################################################
 
@@ -165,10 +176,9 @@ async function updateTodoToDB(req, res) {
 // Get Todos
 app.get('/todos', (req, res) => {
   const sort = req.query.sort;
-  console.log(sort)
-  getTodosFromDB()
-  // getTodosFromDB(sort)
-  } 
+  console.log("Getting from DB with " + sort);
+  getTodosFromDB(req, res, sort);
+  }
 );
 
 // Post Todos

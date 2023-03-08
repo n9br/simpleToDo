@@ -234,14 +234,33 @@ function updateTask() {
 }
 
 function toggleSort() {
-  if ( ! localStorage.getItem("sortOrder")) {
-    localStorage.setItem('sortOrder','date-asc');
-    getTodosFromBackend();
+  // var sortOrder = localStorage.getItem('sortOrder') || 'prio-desc'
+  // console.log("sortOrder in toggleSort Start " + sortOrder);
+
+  var sortOrder = localStorage.getItem('sortOrder');
+
+  if ( ! (sortOrder === 'prio-desc')) {
+    localStorage.setItem('sortOrder','prio-desc');
   }
+  else {
+    localStorage.setItem('sortOrder','date-asc');
+  }
+  console.log("Sortorder End of toggleSort" + localStorage.getItem('sortOrder'))
+  getTodosFromBackend(localStorage.getItem('sortOrder'));
 }
 
-function getTodosFromBackend(){    
-  fetch("http://localhost:4000/todos")
+// fetch('https://example.com?' + new URLSearchParams({
+//     foo: 'value',
+//     bar: 2,
+// }))
+
+function getTodosFromBackend(sortOrder){    
+  var sortOrder = sortOrder || 'date-asc' ;     // if no sortOrder passed, assign default
+  console.log("sortOrder in getTodosFromBackend " + sortOrder);
+  fetch("http://localhost:4000/todos?" + new URLSearchParams({
+      sort: sortOrder
+      })
+    )
     .then((res) => res.json())
     .then((json) => {
       const todos = json.map((todoz) => new ToDo(todoz));
@@ -277,8 +296,8 @@ function updateTodoToDB(
 
   fetch("http://localhost:4000/todos", fetchConfig).then((res) => {
     if (res.status === 200) {
-      console.log(res.status);
-      getTodosFromBackend();
+      // console.log(res.status);
+      getTodosFromBackend(localStorage.getItem('sortOrder'));
       UIkit.notification({
         message: "Task updated!",
         status: "success",
@@ -316,7 +335,7 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Pr
         timeout: 3_000,
       });
       reset();
-      getTodosFromBackend();
+      getTodosFromBackend(localStorage.getItem('sortOrder'));
     }
   });
 }
@@ -327,7 +346,7 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Pr
 function deleteTodo() {
   ToDoId = localStorage.getItem('id');
   // var result = confirm("Are you sure to delete?");
-  console.log("DELETE id: "+ ToDoId)
+  // console.log("DELETE id: "+ ToDoId)
 
 
   // if (confirm("Are you sure to delete?")) {
@@ -341,7 +360,7 @@ function deleteTodo() {
       })
     }
 
-    console.log("jz wird deleted");
+    // console.log("jz wird deleted");
     fetch("http://localhost:4000/todos", fetchConfig)
       .then((res) => {
         console.log(res)
