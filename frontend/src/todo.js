@@ -69,20 +69,26 @@ function repeatcard(todo) {
                     localStorage.setItem('status', '${todo.status}'),
                     edit()"
                     uk-toggle="target: #Edit-ToDo-modal" class="uk-icon-link"uk-icon="pencil"></a></h4>
-                    <p hidden>${todo.id}</p>                    
+                   <!-- <p hidden>${todo.id}</p> -->
+                                       
+          </div>
+
+          <div class="uk-width-auto" style="font-weight: 600">
+            <a href="#" onclick= "localStorage.setItem('id','${todo.id}')"
+            uk-toggle="target: #create-delete-modal"  class="uk-active" style="align: right;" uk-icon="icon: trash"></a> 
           </div>
       </div>
     </div>
       <div class="uk-card-body">
-                  <p>Due_date: ${new Date(
+                 <!--   <p>Due_date: ${new Date(
                     todo.due_date
                   ).toLocaleDateString()}</p>
-                  <p>Time :${todo.time}</p>
-                  <p>Description:${todo.description}</p>
-                  <p> Priority: ${todo.priority}</p>
-                  <p> Status: ${todo.status}</p>
-                  <a href="#" onclick= "localStorage.setItem('id','${todo.id}')"
-                    uk-toggle="target: #create-delete-modal"  class="uk-active" uk-icon="icon: trash"></a>
+                <p>Time :${todo.time}</p>
+                  <p> Priority: ${todo.priority}</p>  -->
+                  ${todo.description}<p> 
+                  Status: ${todo.status}</p>
+                  
+                  
       </div>
   </div>
     `;
