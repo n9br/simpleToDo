@@ -81,7 +81,8 @@ class ToDo {
 
     case 'prio-desc':
       console.log('orderString = "ORDER BY priority DESC"- case prio-desc');
-      orderString = "ORDER BY priority DESC";
+      // orderString = "ORDER BY priority DESC";
+      orderString = "ORDER BY array_position(array['low', 'medium', 'high'], priority) DESC;"
       break;
     
     default:

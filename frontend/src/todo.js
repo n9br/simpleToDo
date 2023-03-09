@@ -249,13 +249,13 @@ function toggleSort() {
 
   var sortOrder = localStorage.getItem('sortOrder');
 
-  if ( ! (sortOrder === 'prio-desc')) {
-    localStorage.setItem('sortOrder','prio-desc');
-  }
-  else {
+  if ( ! (sortOrder === 'date-asc')) {
     localStorage.setItem('sortOrder','date-asc');
   }
-  console.log("Sortorder End of toggleSort" + localStorage.getItem('sortOrder'))
+  else {
+    localStorage.setItem('sortOrder','prio-desc');
+  }
+  // console.log("Sortorder End of toggleSort" + localStorage.getItem('sortOrder'))
   getTodosFromBackend(localStorage.getItem('sortOrder'));
 }
 
@@ -266,7 +266,7 @@ function toggleSort() {
 
 function getTodosFromBackend(sortOrder){    
   var sortOrder = sortOrder || 'date-asc' ;     // if no sortOrder passed, assign default
-  console.log("sortOrder in getTodosFromBackend " + sortOrder);
+  // console.log("sortOrder in getTodosFromBackend " + sortOrder);
   fetch("http://localhost:4000/todos?" + new URLSearchParams({
       sort: sortOrder
       })
@@ -391,4 +391,9 @@ function deleteTodo() {
       });
   }
 // }
-getTodosFromBackend();
+
+var sortOrder = localStorage.getItem('sortOrder');
+// console.log("SortOrder in todo.js: " + sortOrder);
+if ( sortOrder === null ) { localStorage.setItem('sortOrder','date-asc'); }
+
+getTodosFromBackend(sortOrder);
