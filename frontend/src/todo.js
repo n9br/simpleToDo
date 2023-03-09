@@ -6,7 +6,6 @@ class ToDo {
   time;
   priority;
   status;
- 
 
   constructor(data) {
     this.id = data.id;
@@ -19,13 +18,19 @@ class ToDo {
   }
 }
 
-
 function repeatcard(todo) {
-
   let highlightclass = "";
   let userLang = navigator.language || navigator.userLanguage;
-  let today = new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
-  let due_date = new Date(todo.due_date).toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"});
+  let today = new Date().toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  let due_date = new Date(todo.due_date).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
   // let due_date = new Date(todo.due_date);
   // console.log("Today: " + today + " - due date: " + due_date);
   if (due_date === today) {
@@ -36,11 +41,15 @@ function repeatcard(todo) {
   // let displayDate = new Date(todo.due_date).toLocaleDateString('en-us', { dateStyle: "medium", timeStyle: "short", timeZone: "", weekday:"short", month:"short", day:"numeric"});
   // let displayDate = new Date(todo.due_date);
   // let displayDate = new Date(todo.due_date).toLocaleDateString('en-us');
-  let displayDate = new Date(todo.due_date).toLocaleDateString(userLang, { weekday:"short", month:"numeric", day:"numeric" });
+  let displayDate = new Date(todo.due_date).toLocaleDateString(userLang, {
+    weekday: "short",
+    month: "numeric",
+    day: "numeric",
+  });
 
   // console.log("Todo-Time of " + todo.title + " is : " + todo.time.substr(0,5) + " of type " + typeof(todo.time));
-  let cardTime = todo.time.substr(0,5)
-  let prioMark = todo.priority
+  let cardTime = todo.time.substr(0, 5);
+  let prioMark = todo.priority;
 
   return `
   <div class="uk-card uk-card-default ${highlightclass} uk-width-1-2@m td-container-center" style="margin-bottom: 30px;">
@@ -81,8 +90,8 @@ function repeatcard(todo) {
     </div>
       <div class="uk-card-body">
                  <!--   <p>Due_date: ${new Date(
-                    todo.due_date
-                  ).toLocaleDateString()}</p>
+                   todo.due_date
+                 ).toLocaleDateString()}</p>
                 <p>Time :${todo.time}</p>
                   <p> Priority: ${todo.priority}</p>  -->
                   ${todo.description}<p> 
@@ -104,10 +113,15 @@ function edit() {
   document.getElementById("card-todotext").value = task_description;
 
   const task_duedate = localStorage.getItem("Due_date");
-  let isodate = new Date(task_duedate).toISOString().split('T')[0];
+  let isodate = new Date(task_duedate).toISOString().split("T")[0];
   let d = new Date(task_duedate);
-  console.log("task_duedate: " + task_duedate + " - isodate: " + isodate );
-  let datestring = d.getFullYear().toString().padStart(4, '0') + '-' + (d.getMonth()+1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0');
+  console.log("task_duedate: " + task_duedate + " - isodate: " + isodate);
+  let datestring =
+    d.getFullYear().toString().padStart(4, "0") +
+    "-" +
+    (d.getMonth() + 1).toString().padStart(2, "0") +
+    "-" +
+    d.getDate().toString().padStart(2, "0");
   document.getElementById("card-DueDate").value = datestring;
 
   const task_time = localStorage.getItem("time");
@@ -118,15 +132,13 @@ function edit() {
   console.log(task_priority);
   document.getElementById("card-prio").value = task_priority;
 
-
   const task_status = localStorage.getItem("status");
   console.log(task_status);
-      if(task_status == "Pending"){
-      document.getElementById("card_status_pending").checked =true;
-      }
-      else if(task_status == "Completed"){
-      document.getElementById("card_status_completed").checked =true;
-      }
+  if (task_status == "Pending") {
+    document.getElementById("card_status_pending").checked = true;
+  } else if (task_status == "Completed") {
+    document.getElementById("card_status_completed").checked = true;
+  }
 }
 
 function displaytodos(todo) {
@@ -142,49 +154,57 @@ function displaytodos(todo) {
 
 function saveTask() {
   const ToDoTitle = document.getElementById("td-title").value;
-      if (ToDoTitle == ""){
-        alert("Please fill title");
-        document.getElementById("td-title").focus();
-        return false;
-      } 
+  if (ToDoTitle == "") {
+    alert("Please fill title");
+    document.getElementById("td-title").focus();
+    return false;
+  }
 
-  const ToDoDes = document.getElementById("td-todotext").value
-      if(ToDoDes== ""){
-        alert("Please fill Description");
-        document.getElementById("td-todotext").focus();
-        return false;
-      }
-      
+  const ToDoDes = document.getElementById("td-todotext").value;
+  if (ToDoDes == "") {
+    alert("Please fill Description");
+    document.getElementById("td-todotext").focus();
+    return false;
+  }
+
   const ToDo_Due_Date = document.getElementById("td-DueDate").value;
-      if(ToDo_Due_Date == ""){
-        alert("Please fill DueDate");
-        document.getElementById("td-DueDate").focus();
-        return false;
-      }
+  if (ToDo_Due_Date == "") {
+    alert("Please fill DueDate");
+    document.getElementById("td-DueDate").focus();
+    return false;
+  }
 
-  const ToDo_Priority = document.getElementById("td-prio").value
-      if(ToDo_Priority== ""){
-        alert("Please fill Priority");
-        document.getElementById("td-prio").focus();
-        return false;
-      }
-      
-  
+  const ToDo_Priority = document.getElementById("td-prio").value;
+  if (ToDo_Priority == "") {
+    alert("Please fill Priority");
+    document.getElementById("td-prio").focus();
+    return false;
+  }
+
   const ToDo_time = document.getElementById("td_time").value;
-      if (ToDo_time ==""){
-        alert("Please fill Time");
-        document.getElementById("td_time").focus();
-        return false;
-      }
+  if (ToDo_time == "") {
+    alert("Please fill Time");
+    document.getElementById("td_time").focus();
+    return false;
+  }
   var ToDo_status;
-      if(document.getElementById('status_pending').checked) {   
-          ToDo_status = document.getElementById('status_pending').value;  }  
-      else{
-        if(document.getElementById('status_completed').checked) {   
-            ToDo_status = document.getElementById('status_completed').value; }}
+  if (document.getElementById("status_pending").checked) {
+    ToDo_status = document.getElementById("status_pending").value;
+  } else {
+    if (document.getElementById("status_completed").checked) {
+      ToDo_status = document.getElementById("status_completed").value;
+    }
+  }
 
-  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority,ToDo_status);
- 
+  console.log(
+    ToDoTitle,
+    ToDoDes,
+    ToDo_Due_Date,
+    ToDo_time,
+    ToDo_Priority,
+    ToDo_status
+  );
+
   postToDoToBackend(
     ToDoTitle,
     ToDoDes,
@@ -195,14 +215,13 @@ function saveTask() {
   );
 }
 
-function reset(){
+function reset() {
   document.getElementById("td-title").value = "";
   document.getElementById("td-todotext").value = "";
   document.getElementById("td-DueDate").value = "";
   document.getElementById("td_time").value = "";
-  document.getElementById("td-prio").value = "low"
- }
-
+  document.getElementById("td-prio").value = "low";
+}
 
 function updateTask() {
   const ToDoid = localStorage.getItem("id");
@@ -212,13 +231,13 @@ function updateTask() {
   const ToDo_time = document.getElementById("card_time").value;
   const ToDo_Priority = document.getElementById("card-prio").value;
   var ToDo_status;
-      if(document.getElementById('card_status_pending').checked) {   
-          ToDo_status = document.getElementById('card_status_pending').value;  }  
-      else{
-        if(document.getElementById('card_status_completed').checked) {   
-            ToDo_status = document.getElementById('card_status_completed').value; 
-          }
-        }
+  if (document.getElementById("card_status_pending").checked) {
+    ToDo_status = document.getElementById("card_status_pending").value;
+  } else {
+    if (document.getElementById("card_status_completed").checked) {
+      ToDo_status = document.getElementById("card_status_completed").value;
+    }
+  }
   console.log(
     ToDoid,
     ToDoTitle,
@@ -226,8 +245,7 @@ function updateTask() {
     ToDo_Due_Date,
     ToDo_time,
     ToDo_Priority,
-    ToDo_status,
-    
+    ToDo_status
   );
 
   updateTodoToDB(
@@ -237,26 +255,34 @@ function updateTask() {
     ToDo_Due_Date,
     ToDo_time,
     ToDo_Priority,
-    ToDo_status,
+    ToDo_status
   );
 
-  console.log(ToDoTitle, ToDoDes, ToDo_Due_Date,ToDo_time, ToDo_Priority,ToDo_status);
+  console.log(
+    ToDoTitle,
+    ToDoDes,
+    ToDo_Due_Date,
+    ToDo_time,
+    ToDo_Priority,
+    ToDo_status
+  );
 }
 
 function toggleSort() {
   // var sortOrder = localStorage.getItem('sortOrder') || 'prio-desc'
   // console.log("sortOrder in toggleSort Start " + sortOrder);
 
-  var sortOrder = localStorage.getItem('sortOrder');
+  var sortOrder = localStorage.getItem("sortOrder");
 
-  if ( ! (sortOrder === 'prio-desc')) {
-    localStorage.setItem('sortOrder','prio-desc');
+  if (!(sortOrder === "prio-desc")) {
+    localStorage.setItem("sortOrder", "prio-desc");
+  } else {
+    localStorage.setItem("sortOrder", "date-asc");
   }
-  else {
-    localStorage.setItem('sortOrder','date-asc');
-  }
-  console.log("Sortorder End of toggleSort" + localStorage.getItem('sortOrder'))
-  getTodosFromBackend(localStorage.getItem('sortOrder'));
+  console.log(
+    "Sortorder End of toggleSort" + localStorage.getItem("sortOrder")
+  );
+  getTodosFromBackend(localStorage.getItem("sortOrder"));
 }
 
 // fetch('https://example.com?' + new URLSearchParams({
@@ -264,13 +290,15 @@ function toggleSort() {
 //     bar: 2,
 // }))
 
-function getTodosFromBackend(sortOrder){    
-  var sortOrder = sortOrder || 'date-asc' ;     // if no sortOrder passed, assign default
+function getTodosFromBackend(sortOrder) {
+  var sortOrder = sortOrder || "date-asc"; // if no sortOrder passed, assign default
   console.log("sortOrder in getTodosFromBackend " + sortOrder);
-  fetch("http://localhost:4000/todos?" + new URLSearchParams({
-      sort: sortOrder
+  fetch(
+    "http://localhost:4000/todos?" +
+      new URLSearchParams({
+        sort: sortOrder,
       })
-    )
+  )
     .then((res) => res.json())
     .then((json) => {
       const todos = json.map((todoz) => new ToDo(todoz));
@@ -307,18 +335,26 @@ function updateTodoToDB(
   fetch("http://localhost:4000/todos", fetchConfig).then((res) => {
     if (res.status === 200) {
       // console.log(res.status);
-      getTodosFromBackend(localStorage.getItem('sortOrder'));
+      getTodosFromBackend(localStorage.getItem("sortOrder"));
       UIkit.notification({
         message: "Task updated!",
         status: "success",
         pos: "bottom-center",
         timeout: 3_000,
       });
+      document.querySelector("#edit-modal-close-btn").click();
     }
   });
 }
 
-function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Priority, ToDo_status) {
+function postToDoToBackend(
+  ToDoTitle,
+  ToDoDes,
+  ToDo_Due_Date,
+  ToDo_time,
+  ToDo_Priority,
+  ToDo_status
+) {
   var fetchConfig = {
     method: "POST",
     headers: {
@@ -330,7 +366,7 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Pr
       due_date: ToDo_Due_Date,
       time: ToDo_time,
       priority: ToDo_Priority,
-      status : ToDo_status,
+      status: ToDo_status,
     }),
   };
 
@@ -345,50 +381,45 @@ function postToDoToBackend(ToDoTitle, ToDoDes, ToDo_Due_Date, ToDo_time, ToDo_Pr
         timeout: 3_000,
       });
       reset();
-      getTodosFromBackend(localStorage.getItem('sortOrder'));
+      getTodosFromBackend(localStorage.getItem("sortOrder"));
     }
   });
 }
 
-
-
-
 function deleteTodo() {
-  ToDoId = localStorage.getItem('id');
+  ToDoId = localStorage.getItem("id");
   // var result = confirm("Are you sure to delete?");
-  // console.log("DELETE id: "+ ToDoId)
-
+  console.log("DELETE id: " + ToDoId);
 
   // if (confirm("Are you sure to delete?")) {
-    var fetchConfig = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: ToDoId
-      })
-    }
+  var fetchConfig = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: ToDoId,
+    }),
+  };
 
-    // console.log("jz wird deleted");
-    fetch("http://localhost:4000/todos", fetchConfig)
-      .then((res) => {
-        console.log(res)
-        if (res.status === 200) {
-
-
-          UIkit.notification({
-            message: "Task Delete!",
-            status: "success",
-            pos: "bottom-center",
-            timeout: 3_000,
-          });
-
-        }
-      })
-      .catch((err)=>{
-        console.log(err)
-      });
-  }
+  // console.log("jz wird deleted");
+  fetch("http://localhost:4000/todos", fetchConfig)
+    .then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        getTodosFromBackend(localStorage.getItem("sortOrder"));
+        UIkit.notification({
+          message: "Task Delete!",
+          status: "success",
+          pos: "bottom-center",
+          timeout: 3_000,
+        });
+        document.querySelector("#delete-modal-close-btn").click();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 // }
 getTodosFromBackend();
