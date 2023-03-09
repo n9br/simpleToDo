@@ -279,10 +279,9 @@ function toggleSort() {
   } else {
     localStorage.setItem("sortOrder", "date-asc");
   }
-  console.log(
-    "Sortorder End of toggleSort" + localStorage.getItem("sortOrder")
-  );
-  getTodosFromBackend(localStorage.getItem("sortOrder"));
+ 
+  // console.log("Sortorder End of toggleSort" + localStorage.getItem('sortOrder'))
+  getTodosFromBackend(localStorage.getItem('sortOrder'));
 }
 
 // fetch('https://example.com?' + new URLSearchParams({
@@ -292,7 +291,7 @@ function toggleSort() {
 
 function getTodosFromBackend(sortOrder) {
   var sortOrder = sortOrder || "date-asc"; // if no sortOrder passed, assign default
-  console.log("sortOrder in getTodosFromBackend " + sortOrder);
+  // console.log("sortOrder in getTodosFromBackend " + sortOrder);
   fetch(
     "http://localhost:4000/todos?" +
       new URLSearchParams({
@@ -422,4 +421,9 @@ function deleteTodo() {
     });
 }
 // }
-getTodosFromBackend();
+
+var sortOrder = localStorage.getItem('sortOrder');
+// console.log("SortOrder in todo.js: " + sortOrder);
+if ( sortOrder === null ) { localStorage.setItem('sortOrder','date-asc'); }
+
+getTodosFromBackend(sortOrder);
