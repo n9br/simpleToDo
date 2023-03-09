@@ -85,8 +85,8 @@ function repeatcard(todo) {
                   ).toLocaleDateString()}</p>
                 <p>Time :${todo.time}</p>
                   <p> Priority: ${todo.priority}</p>  -->
-                  ${todo.description}<p> 
-                  Status: ${todo.status}</p>
+                  <p>${todo.description}<p>
+                  <p>Status: <b>${todo.status}</b></p>
                   
                   
       </div>
