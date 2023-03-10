@@ -426,4 +426,4 @@ var sortOrder = localStorage.getItem('sortOrder');
 // console.log("SortOrder in todo.js: " + sortOrder);
 if ( sortOrder === null ) { localStorage.setItem('sortOrder','date-asc'); }
 
-getTodosFromBackend(sortOrder);
+getTodosFromBackend();
